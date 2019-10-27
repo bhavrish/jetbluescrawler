@@ -9,12 +9,13 @@
     <script type="text/javascript" src="wordcloud2.js"></script>
     <script type="text/javascript" src="index.js"></script>
     <script type="text/javascript">
-      const list = [['Cost', 25], ['Leg room', 12], ['Timeliness', 20], ['Safety', 14], ['Family options', 15],
-    ['Social consciousness', 10], ['Baggage fees', 18], ['Hidden fees', 15], ['Availability', 15],
-    ['Travel rewards', 15], ['Integration', 10], ["Customer service", 22], ["Reimbursement", 14]];
+      const list = [['Cost', 25], ['Leg room', 12], ['Timeliness', 20], ['Availability', 15],
+    ['Safety', 10], ['Family options', 12], ['Social consciousness', 10], ['Baggage fees', 18],
+    ['Hidden fees', 16], ['Travel rewards', 15], ['Integration w/ others', 10], ['Customer service', 20],
+  ['Reimbursement',14]];
     </script>
     <style>
-      h2 {
+      h1 {
         text-align:center
       }
     </style>
@@ -22,7 +23,7 @@
   <body>
     <header>
       <div class="center">
-        <h2>Jet Blue Satisfaction</h2>
+        <h1>Jet Blue Satisfaction</h1>
       </div>
     </header>
     <main>
@@ -32,12 +33,15 @@
           <script type="text/javascript">
             WordCloud(document.getElementById('good_canvas'),
             { list: list, minRotation: 0, maxRotation: 0, weightFactor: 2.25, drawOutOfBound:true,
-              ellipticity: 1,
+              ellipticity: 0.8,
+              color: function() {
+	               return("#00"+Math.floor(1+Math.random()*224).toString(16)+"00")
+              },
               hover: function(item) {
 
               },
               click: function(item) {
-                window.location.href=`${item[0].toLowerCase().replace(/\s/g,'')}.html`
+                window.location.href=`${item[0].toLowerCase().replace(/\s/g,'')}good.html`
             }});
           </script>
         </div>
@@ -49,11 +53,14 @@
           <script type="text/javascript">
             WordCloud(document.getElementById('bad_canvas'),
             { list: list, minRotation: 0, maxRotation: 0, weightFactor: 2.25, drawOutOfBound:true,
-              ellipticity: 1,
+              ellipticity: 0.8,
+              color: function() {
+	               return("#"+Math.floor(1+Math.random()*224).toString(16)+"0000");
+              },
               hover: function(item) {
               },
               click: function(item) {
-                window.location.href=`${item[0].toLowerCase().replace(/\s/g,'')}.html`
+                window.location.href=`${item[0].toLowerCase().replace(/\s/g,'')}bad.html`
             }} );
           </script>
         </div>
