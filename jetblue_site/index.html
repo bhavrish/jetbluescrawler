@@ -4,7 +4,13 @@
     <meta charset="utf-8">
     <title>Jet Blue Shit</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script type="text/javascript" src="wordcloud2.js"></script>
+    <script type="text/javascript">
+      const list = [['Cost', 12], ['Leg room', 12], ['Timeliness', 20], ['Safety', 25], ['Family options', 15],
+    ['Social consciousness', 10], ['Baggage fees', 15], ['Hidden fees', 15], ['Availability', 10]];
+    </script>
     <style>
       h2 {
         text-align:center
@@ -15,16 +21,41 @@
     <header>
       <div class="center">
         <h2>Jet Blue Satisfaction</h2>
-        <canvas id="my_canvas" .center></canvas>
-        <script type="text/javascript">
-          const list = [['foo', 12], ['bar', 6], ['hello', 20], ['world', 40]];
-          WordCloud(document.getElementById('my_canvas'),
-          { list: list, minRotation: 0, maxRotation: 0, weightFactor: 2, drawOutOfBound:true } );
-        </script>
-
       </div>
     </header>
     <main>
+      <div class="split left">
+        <div class="centered">
+          <canvas id="good_canvas"></canvas>
+          <script type="text/javascript">
+            WordCloud(document.getElementById('good_canvas'),
+            { list: list, minRotation: 0, maxRotation: 0, weightFactor: 2, drawOutOfBound:true,
+              hover: function(item) {
+                window.drawBox
+              },
+              click: function(item) {
+                window.location.href=`${item[0].toLowerCase().replace(/\s/g,'')}.html`
+            }});
+          </script>
+        </div>
+      </div>
+
+      <div class="split right">
+        <div class="centered">
+          <canvas id="bad_canvas"></canvas>
+          <script type="text/javascript">
+
+            WordCloud(document.getElementById('bad_canvas'),
+            { list: list, minRotation: 0, maxRotation: 0, weightFactor: 2, drawOutOfBound:true,
+              hover: function(item) {
+                //document.querySelector()
+              },
+              click: function(item) {
+                window.location.href=`${item[0]}.html`
+            }} );
+          </script>
+        </div>
+      </div>
 
     </main>
     <footer>
