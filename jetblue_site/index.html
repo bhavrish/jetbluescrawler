@@ -7,9 +7,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script type="text/javascript" src="wordcloud2.js"></script>
+    <script type="text/javascript" src="index.js"></script>
     <script type="text/javascript">
-      const list = [['Cost', 12], ['Leg room', 12], ['Timeliness', 20], ['Safety', 25], ['Family options', 15],
-    ['Social consciousness', 10], ['Baggage fees', 15], ['Hidden fees', 15], ['Availability', 10]];
+      const list = [['Cost', 25], ['Leg room', 12], ['Timeliness', 20], ['Safety', 14], ['Family options', 15],
+    ['Social consciousness', 10], ['Baggage fees', 18], ['Hidden fees', 15], ['Availability', 15],
+    ['Travel rewards', 15], ['Integration', 10], ["Customer service", 22], ["Reimbursement", 14]];
     </script>
     <style>
       h2 {
@@ -26,12 +28,13 @@
     <main>
       <div class="split left">
         <div class="centered">
-          <canvas id="good_canvas"></canvas>
+          <canvas id="good_canvas" width="700" height="500"></canvas>
           <script type="text/javascript">
             WordCloud(document.getElementById('good_canvas'),
-            { list: list, minRotation: 0, maxRotation: 0, weightFactor: 2, drawOutOfBound:true,
+            { list: list, minRotation: 0, maxRotation: 0, weightFactor: 2.25, drawOutOfBound:true,
+              ellipticity: 1,
               hover: function(item) {
-                window.drawBox
+
               },
               click: function(item) {
                 window.location.href=`${item[0].toLowerCase().replace(/\s/g,'')}.html`
@@ -42,16 +45,15 @@
 
       <div class="split right">
         <div class="centered">
-          <canvas id="bad_canvas"></canvas>
+          <canvas id="bad_canvas" width="700" height="500"></canvas>
           <script type="text/javascript">
-
             WordCloud(document.getElementById('bad_canvas'),
-            { list: list, minRotation: 0, maxRotation: 0, weightFactor: 2, drawOutOfBound:true,
+            { list: list, minRotation: 0, maxRotation: 0, weightFactor: 2.25, drawOutOfBound:true,
+              ellipticity: 1,
               hover: function(item) {
-                //document.querySelector()
               },
               click: function(item) {
-                window.location.href=`${item[0]}.html`
+                window.location.href=`${item[0].toLowerCase().replace(/\s/g,'')}.html`
             }} );
           </script>
         </div>
