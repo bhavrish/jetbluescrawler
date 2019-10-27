@@ -1,3 +1,17 @@
+#bg {
+  background: linear-gradient(#ffffff, #003876) no-repeat center/cover;
+  height: 100%;
+}
+
+#header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    transition: all 0.5s;
+    z-index: 997;
+}
+
 .center {
   text-align: center;
 }
@@ -44,4 +58,21 @@
 .centered img {
   width: 150px;
   border-radius: 50%;
+}
+
+
+.generic-btn {
+  display: inline-block;
+  outline: none;
+  line-height: 40px;
+  padding: 0 30px;
+  font-size: 2em;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 500;
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
 }
