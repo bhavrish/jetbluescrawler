@@ -1,19 +1,27 @@
-{% load static %}
+{% load staticfiles %}
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Don't be blue, Jet Blue!</title>
+    <title>jetBlue</title>
     <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script type="text/javascript" src="{% static 'wordcloud2.js' %}"></script>
+    <script type="text/javascript" src="index.js"></script>
     <script type="text/javascript">
-      const list = [['Cost', 25], ['Leg room', 12], ['Timeliness', 20], ['Safety', 14], ['Family options', 15],
-    ['Social consciousness', 10], ['Baggage fees', 18], ['Hidden fees', 15], ['Availability', 15],
-    ['Travel rewards', 15], ['Integration', 10], ["Customer service", 22], ["Reimbursement", 14]];
+      const list_good = [['Cost', 5], ['Leg room', 18], ['Timeliness', 10], ['Availability', 15],
+    ['Safety', 20], ['Family options', 18], ['Social consciousness', 20], ['Baggage fees', 12],
+    ['Hidden fees', 14], ['Travel rewards', 15], ['Integration w/ others', 20], ['Customer service', 10],
+  ['Reimbursement',16]];
+      const list_bad = [['Cost', 25], ['Leg room', 12], ['Timeliness', 20], ['Availability', 15],
+    ['Safety', 10], ['Family options', 12], ['Social consciousness', 10], ['Baggage fees', 18],
+    ['Hidden fees', 16], ['Travel rewards', 15], ['Integration w/ others', 10], ['Customer service', 20],
+  ['Reimbursement',14]];
     </script>
     <style>
-      h2 {
+      h1 {
         text-align:center
       }
     </style>
@@ -21,7 +29,7 @@
   <body>
     <header>
       <div class="center">
-        <h2>Jet Blue Satisfaction</h2>
+        <h1 style="color:navy;">Don't Feel Blue, jetBlue!</h1>
       </div>
     </header>
     <main>
@@ -30,13 +38,16 @@
           <canvas id="good_canvas" width="700" height="500"></canvas>
           <script type="text/javascript">
             WordCloud(document.getElementById('good_canvas'),
-            { list: list, minRotation: 0, maxRotation: 0, weightFactor: 2.25, drawOutOfBound:true,
-              ellipticity: 1,
+            { list: list_good, minRotation: 0, maxRotation: 0, weightFactor: 2.25, drawOutOfBound:true,
+              ellipticity: 0.8,
+              color: function() {
+	               return("#00"+Math.floor(1+Math.random()*224).toString(16)+"00")
+              },
               hover: function(item) {
 
               },
               click: function(item) {
-                window.location.href=`${item[0].toLowerCase().replace(/\s/g,'')}.html`
+                window.location.href=`${item[0].toLowerCase().replace(/\s/g,'')}good`
             }});
           </script>
         </div>
@@ -47,22 +58,21 @@
           <canvas id="bad_canvas" width="700" height="500"></canvas>
           <script type="text/javascript">
             WordCloud(document.getElementById('bad_canvas'),
-            { list: list, minRotation: 0, maxRotation: 0, weightFactor: 2.25, drawOutOfBound:true,
-              ellipticity: 1,
+            { list: list_bad, minRotation: 0, maxRotation: 0, weightFactor: 2.25, drawOutOfBound:true,
+              ellipticity: 0.8,
+              color: function() {
+	               return("#"+Math.floor(1+Math.random()*224).toString(16)+"0000");
+              },
               hover: function(item) {
               },
               click: function(item) {
-                window.location.href=`${item[0].toLowerCase().replace(/\s/g,'')}.html`
+                window.location.href=`${item[0].toLowerCase().replace(/\s/g,'')}bad`
             }} );
           </script>
         </div>
       </div>
-    </main>
-    {% for timeTweet in timeTweets %}
-        <p >{{ timeTweet.tweet }}</p>
-        <p >{{ timeTweet.result }}</p>
-    {% endfor %}
 
+    </main>
     <footer>
 
     </footer>

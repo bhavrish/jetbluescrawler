@@ -2,17 +2,17 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Cost Tweets</title>
+    <title>Leg Room Tweets</title>
   </head>
   <body style="background-color:#f5f2d0;">
     <center>
-    <h2>Cost Tweets</h2>
-    {% for costTweet in costTweets %}
+    <h2>Leg Room Tweets</h2>
+    {% for legroomTweet in legroomTweets %}
         <blockquote class="twitter-tweet"><p lang="en" dir="ltr">
-        <a href="{{ costTweet.link }}"></a></blockquote>
+        <a href="{{ legroomTweet.link }}"></a></blockquote>
         <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         <br>
     {% endfor %}
-    </center>  
+    </center>
   </body>
 </html>

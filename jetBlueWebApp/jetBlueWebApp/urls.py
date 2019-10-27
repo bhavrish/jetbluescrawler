@@ -25,4 +25,12 @@ import home.views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home.views.home, name='home'),
+    path('availabilitybad', home.views.availabilitybad, name='availabilitybad'),
+    path('availabilitygood', home.views.availabilitygood, name='availabilitygood'),
+    path('costbad', home.views.costbad, name='costbad'),
+    path('costgood', home.views.costgood, name='costgood'),
+    path('legroombad', home.views.legroombad, name='legroombad'),
+    path('legroomgood', home.views.legroomgood, name='legroomgood'),
+    path('timelinessbad', home.views.timelinessbad, name='timelinessbad'),
+    path('timelinessgood', home.views.timelinessgood, name='timelinessgood'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
