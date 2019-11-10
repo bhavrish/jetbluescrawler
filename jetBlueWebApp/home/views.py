@@ -10,6 +10,9 @@ import twint
 def home(request):
 	return render(request,'index.html')
 
+def react(request):
+        return render(request, 'react.html')
+
 def pullRealtimeAvailTweets():
 	c = twint.Config()
 	c.Search = "#jetblue #availability"

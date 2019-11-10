@@ -1,0 +1,22 @@
+@font-face {
+  font-family: "Ilisarniq";
+  font-style: normal;
+  src: url('Ilisarniq-Regular.woff2') format('woff2');
+}
+
+html, body, #app {
+  height: 100%;
+}
+body, .brand-title {
+  font-family: "Ilisarniq", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.hero.is-primary::-moz-selection h1 {
+  background : #000;
+}
+
+.hero.is-primary::selection h1{
+  background : #000;
+}

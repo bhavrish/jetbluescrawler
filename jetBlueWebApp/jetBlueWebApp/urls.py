@@ -18,7 +18,7 @@ from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
 #from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-from django.conf.urls.static import static 
+from django.conf.urls.static import static
 import home.views
 
 
@@ -33,4 +33,5 @@ urlpatterns = [
     path('legroomgood', home.views.legroomgood, name='legroomgood'),
     path('timelinessbad', home.views.timelinessbad, name='timelinessbad'),
     path('timelinessgood', home.views.timelinessgood, name='timelinessgood'),
+    path('react', home.views.react, name='react'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
