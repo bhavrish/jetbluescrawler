@@ -86,8 +86,9 @@ def availabilitygood(request):
 	return render(request,'availabilitygood.html', context={"availableTweets":availableTweets})
 
 def costbad(request):
-	costData = open('./staticfiles/cost.json').read()
-	costTweets = json.loads(costData)
+	costTweets = []
+	for line in open('./CostTweets/tweets.json', 'r'):
+		costTweets.append(json.loads(line))
 
 	for costTweet in costTweets[:]:
 		r = requests.post("https://api.deepai.org/api/sentiment-analysis",
@@ -106,10 +107,7 @@ def costbad(request):
 			costTweets.remove(costTweet)
 		else: # if negative, keep it
 			costTweet["result"]="negative"
-			oldDate = str(costTweet["date"])
-			oldDateList = oldDate.split("/")
-			newDateStr = "20" + oldDateList[2] + "-" + oldDateList[0] + "-" + oldDateList[1]
-			newDate=datetime.datetime.strptime(newDateStr, "%Y-%m-%d").date()
+			newDate=datetime.datetime.strptime(str(costTweet["date"]), "%Y-%m-%d").date()
 
 			costBadObject=CostBadModel(name=str(costTweet["username"]),text=str(costTweet["tweet"]),date=newDate,prediction_level=str(costTweet["result"]))
 			costBadObject.save()
@@ -117,8 +115,9 @@ def costbad(request):
 	return render(request,'costbad.html', context={"costTweets":costTweets})
 
 def costgood(request):
-	costData = open('./staticfiles/cost.json').read()
-	costTweets = json.loads(costData)
+	costTweets = []
+	for line in open('./CostTweets/tweets.json', 'r'):
+		costTweets.append(json.loads(line))
 
 	for costTweet in costTweets[:]:
 		r = requests.post("https://api.deepai.org/api/sentiment-analysis",
@@ -135,10 +134,7 @@ def costgood(request):
 		
 		if score >= 0: # if positive or neutral, keep tweet
 			costTweet["result"]="positive"
-			oldDate = str(costTweet["date"])
-			oldDateList = oldDate.split("/")
-			newDateStr = "20" + oldDateList[2] + "-" + oldDateList[0] + "-" + oldDateList[1]
-			newDate=datetime.datetime.strptime(newDateStr, "%Y-%m-%d").date()
+			newDate=datetime.datetime.strptime(str(costTweet["date"]), "%Y-%m-%d").date()
 
 			costGoodObject=CostGoodModel(name=str(costTweet["username"]),text=str(costTweet["tweet"]),date=newDate,prediction_level=str(costTweet["result"]))
 			costGoodObject.save()
