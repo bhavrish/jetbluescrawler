@@ -12,20 +12,10 @@ def home(request):
 def react(request):
         return render(request, 'react.html')
 
-def pullRealtimeAvailTweets():
-	c = twint.Config()
-	c.Search = "#jetblue #availability"
-	c.Limit = 5
-	c.Store_object = True
-	twint.run.Search(c)
-	availableTweets = twint.output.tweets_list
-	return availableTweets
-
 def availabilitybad(request):
-	#availableTweets=pullRealtimeAvailTweets()
-
-	availableData = open('./staticfiles/availability.json').read()
-	availableTweets = json.loads(availableData)
+	availableTweets = []
+	for line in open('./AvailabilityTweets/tweets.json', 'r'):
+		availableTweets.append(json.loads(line))
 
 	for availableTweet in availableTweets[:]:
 		r = requests.post("https://api.deepai.org/api/sentiment-analysis",
@@ -44,10 +34,7 @@ def availabilitybad(request):
 			availableTweets.remove(availableTweet)
 		else: # if negative, keep it
 			availableTweet["result"]="negative"
-			oldDate = str(availableTweet["date"])
-			oldDateList = oldDate.split("/")
-			newDateStr = "20" + oldDateList[2] + "-" + oldDateList[0] + "-" + oldDateList[1]
-			newDate=datetime.datetime.strptime(newDateStr, "%Y-%m-%d").date()
+			newDate=datetime.datetime.strptime(str(availableTweet["date"]), "%Y-%m-%d").date()
 
 			availabilityBadObject=AvailabilityBadModel(name=str(availableTweet["username"]),text=str(availableTweet["tweet"]),date=newDate,prediction_level=str(availableTweet["result"]))
 			availabilityBadObject.save()
@@ -55,8 +42,9 @@ def availabilitybad(request):
 	return render(request,'availabilitybad.html', context={"availableTweets":availableTweets})
 
 def availabilitygood(request):
-	availableData = open('./staticfiles/availability.json').read()
-	availableTweets = json.loads(availableData)
+	availableTweets = []
+	for line in open('./AvailabilityTweets/tweets.json', 'r'):
+		availableTweets.append(json.loads(line))
 
 	for availableTweet in availableTweets[:]:
 		r = requests.post("https://api.deepai.org/api/sentiment-analysis",
@@ -73,10 +61,7 @@ def availabilitygood(request):
 			
 		if score >= 0: # if positive or neutral, keep tweet
 			availableTweet["result"]="positive"
-			oldDate = str(availableTweet["date"])
-			oldDateList = oldDate.split("/")
-			newDateStr = "20" + oldDateList[2] + "-" + oldDateList[0] + "-" + oldDateList[1]
-			newDate=datetime.datetime.strptime(newDateStr, "%Y-%m-%d").date()
+			newDate=datetime.datetime.strptime(str(availableTweet["date"]), "%Y-%m-%d").date()
 
 			availabilityGoodObject=AvailabilityGoodModel(name=str(availableTweet["username"]),text=str(availableTweet["tweet"]),date=newDate,prediction_level=str(availableTweet["result"]))
 			availabilityGoodObject.save()
@@ -144,8 +129,9 @@ def costgood(request):
 	return render(request,'costgood.html', context={"costTweets":costTweets})
 
 def legroombad(request):
-	legroomData = open('./staticfiles/legroom.json').read()
-	legroomTweets = json.loads(legroomData)
+	legroomTweets = []
+	for line in open('./LegroomTweets/tweets.json', 'r'):
+		legroomTweets.append(json.loads(line))
 
 	for legroomTweet in legroomTweets[:]:
 		r = requests.post("https://api.deepai.org/api/sentiment-analysis",
@@ -164,10 +150,7 @@ def legroombad(request):
 			legroomTweets.remove(legroomTweet)
 		else: # if negative, keep it
 			legroomTweet["result"]="negative"
-			oldDate = str(legroomTweet["date"])
-			oldDateList = oldDate.split("/")
-			newDateStr = "20" + oldDateList[2] + "-" + oldDateList[0] + "-" + oldDateList[1]
-			newDate=datetime.datetime.strptime(newDateStr, "%Y-%m-%d").date()
+			newDate=datetime.datetime.strptime(str(legroomTweet["date"]), "%Y-%m-%d").date()
 
 			legroomBadObject=LegroomBadModel(name=str(legroomTweet["username"]),text=str(legroomTweet["tweet"]),date=newDate,prediction_level=str(legroomTweet["result"]))
 			legroomBadObject.save()
@@ -175,8 +158,9 @@ def legroombad(request):
 	return render(request,'legroombad.html', context={"legroomTweets":legroomTweets})
 
 def legroomgood(request):
-	legroomData = open('./staticfiles/legroom.json').read()
-	legroomTweets = json.loads(legroomData)
+	legroomTweets = []
+	for line in open('./LegroomTweets/tweets.json', 'r'):
+		legroomTweets.append(json.loads(line))
 
 	for legroomTweet in legroomTweets[:]:
 		r = requests.post("https://api.deepai.org/api/sentiment-analysis",
@@ -193,10 +177,7 @@ def legroomgood(request):
 		
 		if score >= 0: # if positive or neutral, keep tweet
 			legroomTweet["result"]="positive"
-			oldDate = str(legroomTweet["date"])
-			oldDateList = oldDate.split("/")
-			newDateStr = "20" + oldDateList[2] + "-" + oldDateList[0] + "-" + oldDateList[1]
-			newDate=datetime.datetime.strptime(newDateStr, "%Y-%m-%d").date()
+			newDate=datetime.datetime.strptime(str(legroomTweet["date"]), "%Y-%m-%d").date()
 
 			legroomGoodObject=LegroomGoodModel(name=str(legroomTweet["username"]),text=str(legroomTweet["tweet"]),date=newDate,prediction_level=str(legroomTweet["result"]))
 			legroomGoodObject.save()
@@ -206,8 +187,9 @@ def legroomgood(request):
 	return render(request,'legroomgood.html', context={"legroomTweets":legroomTweets})
 
 def timelinessbad(request):
-	timeData = open('./staticfiles/time.json').read()
-	timeTweets = json.loads(timeData)
+	timeTweets = []
+	for line in open('./TimeTweets/tweets.json', 'r'):
+		timeTweets.append(json.loads(line))
 
 	for timeTweet in timeTweets[:]:
 		r = requests.post("https://api.deepai.org/api/sentiment-analysis",
@@ -226,10 +208,7 @@ def timelinessbad(request):
 			timeTweets.remove(timeTweet)
 		else: # if negative, keep it
 			timeTweet["result"]="negative"
-			oldDate = str(timeTweet["date"])
-			oldDateList = oldDate.split("/")
-			newDateStr = "20" + oldDateList[2] + "-" + oldDateList[0] + "-" + oldDateList[1]
-			newDate=datetime.datetime.strptime(newDateStr, "%Y-%m-%d").date()
+			newDate=datetime.datetime.strptime(str(timeTweet["date"]), "%Y-%m-%d").date()
 
 			timelinessBadObject=TimelinessBadModel(name=str(timeTweet["username"]),text=str(timeTweet["tweet"]),date=newDate,prediction_level=str(timeTweet["result"]))
 			timelinessBadObject.save()
@@ -237,8 +216,9 @@ def timelinessbad(request):
 	return render(request,'timelinessbad.html', context={"timeTweets":timeTweets})
 
 def timelinessgood(request):
-	timeData = open('./staticfiles/time.json').read()
-	timeTweets = json.loads(timeData)
+	timeTweets = []
+	for line in open('./TimeTweets/tweets.json', 'r'):
+		timeTweets.append(json.loads(line))
 
 	for timeTweet in timeTweets[:]:
 		r = requests.post("https://api.deepai.org/api/sentiment-analysis",
@@ -255,10 +235,7 @@ def timelinessgood(request):
 		
 		if score >= 0: # if positive or neutral, keep tweet
 			timeTweet["result"]="positive"
-			oldDate = str(timeTweet["date"])
-			oldDateList = oldDate.split("/")
-			newDateStr = "20" + oldDateList[2] + "-" + oldDateList[0] + "-" + oldDateList[1]
-			newDate=datetime.datetime.strptime(newDateStr, "%Y-%m-%d").date()
+			newDate=datetime.datetime.strptime(str(timeTweet["date"]), "%Y-%m-%d").date()
 
 			timelinessGoodObject=TimelinessGoodModel(name=str(timeTweet["username"]),text=str(timeTweet["tweet"]),date=newDate,prediction_level=str(timeTweet["result"]))
 			timelinessGoodObject.save()
