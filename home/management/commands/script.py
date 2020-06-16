@@ -6,7 +6,7 @@ import os
 import pathlib
 
 class Command(BaseCommand):
-    help = 'Scrapes spoj.com to obtain the details of all the classical problems.'
+    help = 'Scrapes twitter.com to obtain cost-related tweets.'
     
     def handle(self, *args, **options):
         if os.path.exists("CostTweets/tweets.json"):
