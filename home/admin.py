@@ -1,12 +1,12 @@
 from django.contrib import admin
-from .models import AvailabilityBadModel, AvailabilityGoodModel, CostBadModel, CostGoodModel, LegroomBadModel, LegroomGoodModel, TimelinessBadModel, TimelinessGoodModel
+from .models import JetblueAggregateModel, JetblueCondensedModel, AmericanAggregateModel, AmericanCondensedModel, UnitedAggregateModel, UnitedCondensedModel, SpiritAggregateModel, SpiritCondensedModel
 # Register your models here.
 
-admin.site.register(AvailabilityBadModel)
-admin.site.register(AvailabilityGoodModel)
-admin.site.register(CostBadModel)
-admin.site.register(CostGoodModel)
-admin.site.register(LegroomBadModel)
-admin.site.register(LegroomGoodModel)
-admin.site.register(TimelinessBadModel)
-admin.site.register(TimelinessGoodModel)
+admin.site.register(JetblueAggregateModel)
+admin.site.register(JetblueCondensedModel)
+admin.site.register(AmericanAggregateModel)
+admin.site.register(AmericanCondensedModel)
+admin.site.register(UnitedAggregateModel)
+admin.site.register(UnitedCondensedModel)
+admin.site.register(SpiritAggregateModel)
+admin.site.register(SpiritCondensedModel)
