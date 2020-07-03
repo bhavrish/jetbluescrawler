@@ -34,4 +34,5 @@ urlpatterns = [
     path('timelinessbad', home.views.timelinessbad, name='timelinessbad'),
     path('timelinessgood', home.views.timelinessgood, name='timelinessgood'),
     path('react', home.views.react, name='react'),
+    path('cardio', home.views.cardio, name='cardio'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

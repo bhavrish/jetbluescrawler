@@ -243,3 +243,6 @@ def timelinessgood(request):
 			timeTweets.remove(timeTweet)
 
 	return render(request,'timelinessgood.html', context={"timeTweets":timeTweets})
+
+def cardio(request):
+	return render(request, 'cardio.html')
