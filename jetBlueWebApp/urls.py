@@ -58,5 +58,4 @@ urlpatterns = [
     path('spirittimelinessbad', home.views.spirittimelinessbad, name='spirittimelinessbad'),
     path('spirittimelinessgood', home.views.spirittimelinessgood, name='spirittimelinessgood'),
     path('react', home.views.react, name='react'),
-    path('cardio', home.views.cardio, name='cardio'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

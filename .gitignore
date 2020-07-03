@@ -1,2 +1,4 @@
 jetBlueWebApp/venv/
 Pipfile.lock
+jetBlueWebApp/.env
+jetBlueWebApp/.env~

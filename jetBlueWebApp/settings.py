@@ -10,6 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
+from dotenv import load_dotenv
+load_dotenv()
+
 import os
 import django_heroku
 
@@ -21,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'q!ozi%ygt^_*4n!@ede4t*)mvrl08!&0lblh_5jt_jx**yxeph'
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -75,14 +78,19 @@ WSGI_APPLICATION = 'jetBlueWebApp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
+DB_NAME = os.getenv("DB_NAME")
+USER = os.getenv("USER")
+PASSWORD = os.getenv("PASSWORD")
+DB_PORT = os.getenv("PORT")
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql', # connect to PostgresDB
-        'NAME': 'airlinedb',
-        'USER': 'postgres', # username
-        'PASSWORD': 'postgressecurepassword', # password
+        'NAME': DB_NAME,
+        'USER': USER, # username
+        'PASSWORD': PASSWORD, # password
         'HOST':'localhost',
-        'PORT':'5433', 
+        'PORT': DB_PORT, 
     }
 }
 
