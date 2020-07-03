@@ -1,81 +1,159 @@
-{% load staticfiles %}
-
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <br>
-    <title>jetBlue</title>
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script type="text/javascript" src="{% static 'wordcloud2.js' %}"></script>
-    <script type="text/javascript" src="index.js"></script>
-    <script type="text/javascript">
-      const list_good = [['Cost', 5], ['Leg room', 18], ['Timeliness', 10], ['Availability', 15],
-    ['Safety', 20], ['Family options', 18], ['Social consciousness', 20], ['Baggage fees', 12],
-    ['Hidden fees', 14], ['Travel rewards', 15], ['Integration w/ others', 20], ['Customer service', 10],
-  ['Reimbursement',16]];
-      const list_bad = [['Cost', 25], ['Leg room', 12], ['Timeliness', 20], ['Availability', 15],
-    ['Safety', 10], ['Family options', 12], ['Social consciousness', 10], ['Baggage fees', 18],
-    ['Hidden fees', 16], ['Travel rewards', 15], ['Integration w/ others', 10], ['Customer service', 20],
-  ['Reimbursement',14]];
-    </script>
-    <style>
-      h1 {
-        text-align:center
-      }
-    </style>
-  </head>
-  <body style="background-color:#f5f2d0;">
-    <header>
-      <div class="center">
-        <h1 style="color:navy;">Don't Feel Blue, jetBlue!</h1>
-      </div>
-    </header>
-    <main>
-      <div class="split left">
-        <div class="centered">
-          <canvas id="good_canvas" width="700" height="500"></canvas>
-          <script type="text/javascript">
-            WordCloud(document.getElementById('good_canvas'),
-            { list: list_good, minRotation: 0, maxRotation: 0, weightFactor: 2.25, drawOutOfBound:true,
-              ellipticity: 0.8,
-              color: function() {
-	               return("#00"+Math.floor(1+Math.random()*224).toString(16)+"00")
-              },
-              hover: function(item) {
-
-              },
-              click: function(item) {
-                window.location.href=`${item[0].toLowerCase().replace(/\s/g,'')}good`
-            }});
-          </script>
+<html lang=en>
+    <head>
+        <link rel=stylesheet type="text/css" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+        <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script> 
+        <style>
+            body {
+                background-color: #00205B;
+                min-height: 100vw;
+                font-family: 'Work Sans', sans-serif;
+            }
+            .ct-label {
+                color: #f5f5f5;
+            }
+            .ct-grid {
+                stroke: #f5f5f5;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container is-widescreen">
+            <section id="top" class="section">
+                <div class="columns">
+                    <div id="nav" class="column is-one-third pt-4">
+                        <div class="columns is-flex is-vcentered nav-col">
+                            <svg width="5" height="83" viewBox="0 0 5 83" fill="none" xmlns="http://www.w3.org/2000/svg" class="">
+                                    <rect width="5" height="83" fill="white"/>
+                            </svg>   
+                            <div class="column">
+                                <a href="#" class="is-flex has-text-white-ter">
+                                    Sentiment Scores
+                                </a>
+                                <a href="#" class="is-flex has-text-white-ter">
+                                    Methodology
+                                </a>
+                                <a href="#" class="is-flex has-text-white-ter">
+                                    Comparison
+                                </a>
+                                <a href="#" class="is-flex has-text-white-ter">
+                                    About
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="title" class="column has-text-right nav-col">
+                        <div class="is-size-1 has-text-weight-bold title has-text-white-ter">
+                            DON'T FEEL BLUE, JET BLUE
+                        </div>
+                        <div class="subtitle has-text-white-ter">
+                            WHAT AIRLINE DO PEOPLE PREFER?
+                        </div>
+                    </div>
+                </div>
+            </section>
+    
+            <section id="scorecards" class="section">
+                <div class='card is-flex' style="border-radius: 1.25rem; overflow: hidden;">
+                    <div class="card-image is-flex">
+                        <figure class="image">
+                            <img src="https://images.unsplash.com/photo-1576128343868-ba0ea33570a6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&q=80&crop=edges&ar=96:68" width="100%" height="100%" />
+                        </figure>
+                        <img src="https://cldup.com/deRUCl_0QD-2000x2000.png" style="position: absolute; bottom: 12px; left: 60px; width: 15rem;" />
+                    </div>
+                    <div class="card-content">
+                        <h2 class="has-text-weight-bold is-size-2">JETBLUE</h2>
+                        <table class="table is-striped">
+                            <tbody>
+                                <tr>
+                                    <td>Cost</td>
+                                    <td class="has-text-right">10</td>
+                                </tr>
+                                <tr>
+                                    <td>Hidden Fees</td>
+                                    <td class="has-text-right">8</td>
+                                </tr>
+                                <tr>
+                                    <td>Baggage Fees</td>
+                                    <td class="has-text-right">-4</td>
+                                </tr>
+                                <tr>
+                                    <td>Travel Rewards</td>
+                                    <td class="has-text-right">3</td>
+                                </tr>
+                                <tr>
+                                    <td>Reimbursement</td>
+                                    <td class="has-text-right">6</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table is-striped">
+                            <tbody>
+                                <tr>
+                                    <td>Timeliness</td>
+                                    <td class="has-text-right">4</td>
+                                </tr>
+                                <tr>
+                                    <td>Availability</td>
+                                    <td class="has-text-right">2</td>
+                                </tr>
+                                <tr>
+                                    <td>Integration w/ Other Airlines</td>
+                                    <td class="has-text-right">-2</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table is-striped">
+                            <tbody>
+                                <tr>
+                                    <td>Leg Room</td>
+                                    <td class="has-text-right">4</td>
+                                </tr>
+                                <tr>
+                                    <td>Food and Entertainment</td>
+                                    <td class="has-text-right">6</td>
+                                </tr>
+                                <tr>
+                                    <td>Service</td>
+                                    <td class="has-text-right">1</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table is-striped">
+                            <tbody>
+                                <tr>
+                                    <td>Family Options &nbsp;&nbsp;&nbsp;</td>
+                                    <td class="has-text-right">7</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+    
+            <section id="charts" class="section">
+                <div class="ct-chart ct-golden-section" id="chart1"></div>
+            </section>
+    
+            <section id="methodology" class="section">
+    
+            </section>
+    
+            <section id="comparison" class="section">
+    
+            </section>
+    
+            <section id="credits" class="section">
+    
+            </section>
         </div>
-      </div>
-
-      <div class="split right">
-        <div class="centered">
-          <canvas id="bad_canvas" width="700" height="500"></canvas>
-          <script type="text/javascript">
-            WordCloud(document.getElementById('bad_canvas'),
-            { list: list_bad, minRotation: 0, maxRotation: 0, weightFactor: 2.25, drawOutOfBound:true,
-              ellipticity: 0.8,
-              color: function() {
-	               return("#"+Math.floor(1+Math.random()*224).toString(16)+"0000");
-              },
-              hover: function(item) {
-              },
-              click: function(item) {
-                window.location.href=`${item[0].toLowerCase().replace(/\s/g,'')}bad`
-            }} );
-          </script>
-        </div>
-      </div>
-
-    </main>
-    <footer>
-
-    </footer>
-  </body>
+        <script>
+            new Chartist.Line('#chart1', {
+                labels: [1, 2, 3, 4, 5],
+                series: [[-10, -5, 0, 5, 10]]
+            });
+        </script>   
+    </body>
 </html>

@@ -1,50 +1,58 @@
 from django.db import models
 
 # Create your models here.
-class AvailabilityBadModel(models.Model):
-	name= models.CharField(max_length=255)
-	text= models.CharField(max_length=1000)
+class JetblueAggregateModel(models.Model):
+	tweet_id= models.BigIntegerField(default=0)
+	name= models.CharField(default='', max_length=255)
+	text= models.CharField(default='', max_length=1000)
+	link= models.CharField(default='', max_length=1000)
 	date = models.DateTimeField()
-	prediction_level=models.CharField(max_length=20)
+	prediction_level=models.IntegerField()
+	category= models.CharField(max_length=255)
 
-class AvailabilityGoodModel(models.Model):
-	name= models.CharField(max_length=255)
-	text= models.CharField(max_length=1000)
+class JetblueCondensedModel(models.Model):
 	date = models.DateTimeField()
-	prediction_level=models.CharField(max_length=20)
+	average_prediction=models.DecimalField(max_digits=7, decimal_places=2)
+	category= models.CharField(max_length=255)
 
-class CostBadModel(models.Model):
-	name= models.CharField(max_length=255)
-	text= models.CharField(max_length=1000)
+class AmericanAggregateModel(models.Model):
+	tweet_id= models.BigIntegerField(default=0)
+	name= models.CharField(default='', max_length=255)
+	text= models.CharField(default='', max_length=1000)
+	link= models.CharField(default='', max_length=1000)
 	date = models.DateTimeField()
-	prediction_level=models.CharField(max_length=20)
+	prediction_level=models.IntegerField()
+	category= models.CharField(max_length=255)
 
-class CostGoodModel(models.Model):
-	name= models.CharField(max_length=255)
-	text= models.CharField(max_length=1000)
+class AmericanCondensedModel(models.Model):
 	date = models.DateTimeField()
-	prediction_level=models.CharField(max_length=20)
+	average_prediction=models.DecimalField(max_digits=7, decimal_places=2)
+	category= models.CharField(max_length=255)
 
-class LegroomBadModel(models.Model):
-	name= models.CharField(max_length=255)
-	text= models.CharField(max_length=1000)
+class UnitedAggregateModel(models.Model):
+	tweet_id= models.BigIntegerField(default=0)
+	name= models.CharField(default='', max_length=255)
+	text= models.CharField(default='', max_length=1000)
+	link= models.CharField(default='', max_length=1000)
 	date = models.DateTimeField()
-	prediction_level=models.CharField(max_length=20)
+	prediction_level=models.IntegerField()
+	category= models.CharField(max_length=255)
 
-class LegroomGoodModel(models.Model):
-	name= models.CharField(max_length=255)
-	text= models.CharField(max_length=1000)
+class UnitedCondensedModel(models.Model):
 	date = models.DateTimeField()
-	prediction_level=models.CharField(max_length=20)
+	average_prediction=models.DecimalField(max_digits=7, decimal_places=2)
+	category= models.CharField(max_length=255)
 
-class TimelinessBadModel(models.Model):
-	name= models.CharField(max_length=255)
-	text= models.CharField(max_length=1000)
+class SpiritAggregateModel(models.Model):
+	tweet_id= models.BigIntegerField(default=0)
+	name= models.CharField(default='', max_length=255)
+	text= models.CharField(default='', max_length=1000)
+	link= models.CharField(default='', max_length=1000)
 	date = models.DateTimeField()
-	prediction_level=models.CharField(max_length=20)
+	prediction_level=models.IntegerField()
+	category= models.CharField(max_length=255)
 
-class TimelinessGoodModel(models.Model):
-	name= models.CharField(max_length=255)
-	text= models.CharField(max_length=1000)
+class SpiritCondensedModel(models.Model):
 	date = models.DateTimeField()
-	prediction_level=models.CharField(max_length=20)
+	average_prediction=models.DecimalField(max_digits=7, decimal_places=2)
+	category= models.CharField(max_length=255)
