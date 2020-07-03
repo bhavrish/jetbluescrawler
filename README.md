@@ -34,7 +34,7 @@ GRANT ALL PRIVILEGES ON DATABASE <db_name> to <user>;
 
 You'll now need to input your access credentials. You can do this by copying the .modelenv file in jetBlueWebApp and modifying it appropriately.
 ```
-cp jetBlueWebApp/.modelenv .env
+cp jetBlueWebApp/.modelenv jetBlueWebApp/.env
 ```
 
 You can now install the packages and migrate the database to the models.
