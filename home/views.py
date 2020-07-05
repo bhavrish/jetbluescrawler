@@ -66,16 +66,18 @@ def home(request):
 	jetBlueOverallScore = (jetBlueAvailabilityScore + jetBlueCostScore + jetBlueLegroomScore + jetBlueTimeScore)/4
 	
 	jetBlueInfoDict = {
-		'jetBlueAvailabilityScore': jetBlueAvailabilityScore,
-		'jetBlueCostScore': jetBlueCostScore,
-		'jetBlueLegroomScore': jetBlueLegroomScore,
-		'jetBlueTimeScore': jetBlueTimeScore,
-		'jetBlueOverallScore': jetBlueOverallScore,
-		'jetblueOverallTweetsDict': jetblueOverallTweetsDict,
-		'jetblueAvailabilityTweets': jetblueAvailabilityTweets,
-		'jetblueCostTweets': jetblueCostTweets,
-		'jetblueLegroomTweets': jetblueLegroomTweets,
-		'jetblueTimeTweets': jetblueTimeTweets
+		'AvailabilityScore': jetBlueAvailabilityScore,
+		'CostScore': jetBlueCostScore,
+		'LegroomScore': jetBlueLegroomScore,
+		'TimeScore': jetBlueTimeScore,
+		'OverallScore': jetBlueOverallScore,
+		'OverallTweetsDict': jetblueOverallTweetsDict,
+		'AvailabilityTweets': jetblueAvailabilityTweets,
+		'CostTweets': jetblueCostTweets,
+		'LegroomTweets': jetblueLegroomTweets,
+		'TimeTweets': jetblueTimeTweets,
+		'name': 'JETBLUE',
+		'imageURL': 'https://images.unsplash.com/photo-1576128343868-ba0ea33570a6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&q=80&crop=edges&ar=96:69',
 	}
 
 	# American Airlines ------------------------------------------------------------------------------------
@@ -140,16 +142,18 @@ def home(request):
 	americanOverallScore = (americanAvailabilityScore + americanCostScore + americanLegroomScore + americanTimeScore)/4
 	
 	americanInfoDict = {
-		'americanAvailabilityScore': americanAvailabilityScore,
-		'americanCostScore': americanCostScore,
-		'americanLegroomScore': americanLegroomScore,
-		'americanTimeScore': americanTimeScore,
-		'americanOverallScore': americanOverallScore,
-		'americanOverallTweetsDict': americanOverallTweetsDict,
-		'americanAvailabilityTweets': americanAvailabilityTweets,
-		'americanCostTweets': americanCostTweets,
-		'americanLegroomTweets': americanLegroomTweets,
-		'americanTimeTweets': americanTimeTweets
+		'AvailabilityScore': americanAvailabilityScore,
+		'CostScore': americanCostScore,
+		'LegroomScore': americanLegroomScore,
+		'TimeScore': americanTimeScore,
+		'OverallScore': americanOverallScore,
+		'OverallTweetsDict': americanOverallTweetsDict,
+		'AvailabilityTweets': americanAvailabilityTweets,
+		'CostTweets': americanCostTweets,
+		'LegroomTweets': americanLegroomTweets,
+		'TimeTweets': americanTimeTweets,
+		'name': 'AMERICAN',
+		'imageURL': 'https://images.unsplash.com/photo-1532973497172-04b34d604825?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1341&q=80&ar=96:69',
 	}
 
 	# United Airlines ------------------------------------------------------------------------------------
@@ -214,16 +218,18 @@ def home(request):
 	unitedOverallScore = (unitedAvailabilityScore + unitedCostScore + unitedLegroomScore + unitedTimeScore)/4
 	
 	unitedInfoDict = {
-		'unitedAvailabilityScore': unitedAvailabilityScore,
-		'unitedCostScore': unitedCostScore,
-		'unitedLegroomScore': unitedLegroomScore,
-		'unitedTimeScore': unitedTimeScore,
-		'unitedOverallScore': unitedOverallScore,
-		'unitedOverallTweetsDict': unitedOverallTweetsDict,
-		'unitedAvailabilityTweets': unitedAvailabilityTweets,
-		'unitedCostTweets': unitedCostTweets,
-		'unitedLegroomTweets': unitedLegroomTweets,
-		'unitedTimeTweets': unitedTimeTweets
+		'AvailabilityScore': unitedAvailabilityScore,
+		'CostScore': unitedCostScore,
+		'LegroomScore': unitedLegroomScore,
+		'TimeScore': unitedTimeScore,
+		'OverallScore': unitedOverallScore,
+		'OverallTweetsDict': unitedOverallTweetsDict,
+		'AvailabilityTweets': unitedAvailabilityTweets,
+		'CostTweets': unitedCostTweets,
+		'LegroomTweets': unitedLegroomTweets,
+		'TimeTweets': unitedTimeTweets,
+		'name': 'UNITED',
+		'imageURL': 'https://images.unsplash.com/photo-1473862170180-84427c485aca?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80&ar=96:69'
 	}
 
 	# Spirit Airlines ------------------------------------------------------------------------------------
@@ -288,16 +294,18 @@ def home(request):
 	spiritOverallScore = (spiritAvailabilityScore + spiritCostScore + spiritLegroomScore + spiritTimeScore)/4
 	
 	spiritInfoDict = {
-		'spiritAvailabilityScore': spiritAvailabilityScore,
-		'spiritCostScore': spiritCostScore,
-		'spiritLegroomScore': spiritLegroomScore,
-		'spiritTimeScore': spiritTimeScore,
-		'spiritOverallScore': spiritOverallScore,
-		'spiritOverallTweetsDict': spiritOverallTweetsDict,
-		'spiritAvailabilityTweets': spiritAvailabilityTweets,
-		'spiritCostTweets': spiritCostTweets,
-		'spiritLegroomTweets': spiritLegroomTweets,
-		'spiritTimeTweets': spiritTimeTweets
+		'AvailabilityScore': spiritAvailabilityScore,
+		'CostScore': spiritCostScore,
+		'LegroomScore': spiritLegroomScore,
+		'TimeScore': spiritTimeScore,
+		'OverallScore': spiritOverallScore,
+		'OverallTweetsDict': spiritOverallTweetsDict,
+		'AvailabilityTweets': spiritAvailabilityTweets,
+		'CostTweets': spiritCostTweets,
+		'LegroomTweets': spiritLegroomTweets,
+		'TimeTweets': spiritTimeTweets,
+		'name': "SPIRIT",
+		'imageURL': "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/N671NK_%2834006987935%29.jpg/800px-N671NK_%2834006987935%29.jpg",
 	}
 
 	airlineInfoList = [jetBlueInfoDict, americanInfoDict, unitedInfoDict, spiritInfoDict]
