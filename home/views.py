@@ -305,7 +305,7 @@ def home(request):
 		'LegroomTweets': spiritLegroomTweets,
 		'TimeTweets': spiritTimeTweets,
 		'name': "SPIRIT",
-		'imageURL': "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/N671NK_%2834006987935%29.jpg/800px-N671NK_%2834006987935%29.jpg",
+		'imageURL': "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Spirit_Airlines_Airbus_A321-231_N677NK_approaching_Newark_Airport.jpg/1280px-Spirit_Airlines_Airbus_A321-231_N677NK_approaching_Newark_Airport.jpg",
 	}
 
 	airlineInfoList = [jetBlueInfoDict, americanInfoDict, unitedInfoDict, spiritInfoDict]
