@@ -24,9 +24,10 @@ class Command(BaseCommand):
         costTweets = twint.output.tweets_list
         for costTweet in costTweets[:]:
             if not AmericanAggregateModel.objects.filter(tweet_id=costTweet.id).exists(): # if new tweet
+                DEEP_AI_KEY = os.getenv("DEEP_AI_KEY")
                 r = requests.post("https://api.deepai.org/api/sentiment-analysis",
                             data={'text': costTweet.tweet},
-                            headers={'api-key': '98f982f3-91a3-4081-94ef-3249f5cebf89'})
+                            headers={'api-key': 'DEEP_AI_KEY'})
                 resultJSON = r.json()
                 resultOutput = resultJSON['output']
                 score = 0

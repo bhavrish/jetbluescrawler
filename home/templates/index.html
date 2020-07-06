@@ -162,15 +162,15 @@
                 series: [
                     {% for airline in airlineInfoList %}
                         {
-                            name: 'airline.name',
+                            name: '{{ airline.name }}',
                             data: [
-                                {% for k, d in airline.OverallTweetsDict.items %}
-                                    {x: k, y: d},
+                                {% for p, d in airline.OverallTweetsDict.items %}
+                                    {x: "{{ p }}", y: "{{ d }}" },
                                 {% endfor %}
                             ],
                         },
                     {% endfor %}
-                ]
+                ],
             });
         </script>   
     </body>

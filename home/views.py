@@ -2,6 +2,8 @@ from django.shortcuts import render
 from .models import JetblueAggregateModel, JetblueCondensedModel, AmericanAggregateModel, AmericanCondensedModel, UnitedAggregateModel, UnitedCondensedModel, SpiritAggregateModel, SpiritCondensedModel
 import requests
 
+from datetime import datetime
+
 # Create your views here.
 def home(request):
 	# JetBlue ------------------------------------------------------------------------------------
@@ -22,6 +24,7 @@ def home(request):
 	jetBlueLegroomItems = 0
 	jetBlueTimeItems = 0
 	for tweet in jetBlueTweets:
+		tweet.date = tweet.date.strftime("%m/%d/%Y")
 		if tweet.category == 'availability':
 			jetblueAvailabilityTweets.append(tweet)
 			jetBlueAvailabilitySum += tweet.average_prediction
