@@ -27,7 +27,7 @@ class Command(BaseCommand):
                 DEEP_AI_KEY = os.getenv("DEEP_AI_KEY")
                 r = requests.post("https://api.deepai.org/api/sentiment-analysis",
                             data={'text': costTweet.tweet},
-                            headers={'api-key': 'DEEP_AI_KEY'})
+                            headers={'api-key': DEEP_AI_KEY})
                 resultJSON = r.json()
                 resultOutput = resultJSON['output']
                 score = 0
