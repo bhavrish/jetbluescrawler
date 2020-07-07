@@ -4,7 +4,8 @@
         <link rel=stylesheet type="text/css" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
         <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
-        <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script> 
+        <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/chartist-plugin-legend/0.6.2/chartist-plugin-legend.min.js"></script> 
         <style>
             body {
                 background-color: #00205B;
@@ -16,6 +17,14 @@
             }
             .ct-grid {
                 stroke: #f5f5f5;
+            }
+
+            p {
+                
+            }
+
+            .is-hovered:hover {
+                color: #d70206;
             }
         </style>
     </head>
@@ -143,8 +152,19 @@
                 <div class="ct-chart ct-golden-section" id="chart1"></div>
             </section>
     
-            <section id="methodology" class="section">
-                
+            <section id="methodology" class="section has-text-white-ter">
+                <h2 class="is-size-2">Methodology</h2>
+                <div class="is-size-5">
+                    <p class="">
+                        In the midst of the coronavirus pandemic, we were curious to see how airline perception was faring. Perception and sentiment towards brands plays a large role in spending decisions.
+                    </p>
+                    <p>
+                        We decided to mine twitter for sentiment related to major airlines. We chose to segment our analysis by the different categories that people found influenced whether they would travel an airline. These categories were compiled from survey data via Google Forms. We then created weights for an overall score using <a href="https://www.statista.com/statistics/682161/important-factors-flight-purchase-us-travel/" class="is-hovered">Statista</a>. The sentiment model used is Stanford's <a href="https://deepai.org/machine-learning-model/sentiment-analysis" class="is-hovered">DeepAI model</a>. As an alternative, you can download the pytorch model we trained <a href="https://www.dropbox.com/s/8kzixo72ymoaw5v/export.pkl?dl=0" class="is-hovered">here</a>.
+                    </p>
+                    <p>
+                        We proceeded to create cron jobs to continuously mine twitter for sentiment related to these categories in order to observe variance over time. We stored the scores we found, adjusted and averaged over tweets collected.
+                    </p>
+                </div>
             </section>
     
             <section id="comparison" class="section">
@@ -170,6 +190,9 @@
                             ],
                         },
                     {% endfor %}
+                ],
+                plugins: [
+                    Chartist.plugins.legend(),
                 ],
             });
         </script>   

@@ -10,7 +10,7 @@ import requests
 
 class Command(BaseCommand):
     help = 'Scrapes twitter.com to obtain baggage-fees-related tweets.'
-    
+
     def handle(self, *args, **options):
         # Twint tweet retrieval script
         c = twint.Config()
@@ -19,7 +19,7 @@ class Command(BaseCommand):
         c.Store_object = True
         c.Hide_output = True
         twint.run.Search(c)
-        
+
         # Update AmericanAggregateModel and DeepAI sentiment analysis
         baggageFeesTweets = twint.output.tweets_list
         for baggageFeesTweet in baggageFeesTweets[:]:
@@ -36,7 +36,6 @@ class Command(BaseCommand):
                         score-=1
                     elif x == "Positive":
                         score+=1
-                    
                 aggregateCreated = AmericanAggregateModel.objects.get_or_create(tweet_id=baggageFeesTweet.id, name=str(baggageFeesTweet.username), text=str(baggageFeesTweet.tweet), link=str(baggageFeesTweet.link), date=baggageFeesTweet.datestamp, prediction_level=score, category="baggage-fees")
 
         # Update AmericanCondensedModel
@@ -50,4 +49,5 @@ class Command(BaseCommand):
         averageScore = 0
         if not count == 0:
             averageScore = score / count
+
         condensedCreated = AmericanCondensedModel.objects.get_or_create(date=timezone.now(), average_prediction=averageScore, category="baggage-fees")
