@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from ...models import AmericanAggregateModel, AmericanCondensedModel
+from ...models import SpiritAggregateModel, SpiritCondensedModel
 from django.utils import timezone 
 
 import json
@@ -10,20 +10,20 @@ import requests
 
 class Command(BaseCommand):
     help = 'Scrapes twitter.com to obtain baggage-fees-related tweets.'
-
+    
     def handle(self, *args, **options):
         # Twint tweet retrieval script
         c = twint.Config()
-        c.Search = "#americanairlines baggage fees"
+        c.Search = "#spiritairlines baggage fees"
         c.Limit = 5
         c.Store_object = True
         c.Hide_output = True
         twint.run.Search(c)
-
-        # Update AmericanAggregateModel and DeepAI sentiment analysis
+        
+        # Update SpiritAggregateModel and DeepAI sentiment analysis
         baggageFeesTweets = twint.output.tweets_list
         for baggageFeesTweet in baggageFeesTweets[:]:
-            if not AmericanAggregateModel.objects.filter(tweet_id=baggageFeesTweet.id).exists(): # if new tweet
+            if not SpiritAggregateModel.objects.filter(tweet_id=baggageFeesTweet.id).exists(): # if new tweet
                 DEEP_AI_KEY = os.getenv("DEEP_AI_KEY")
                 r = requests.post("https://api.deepai.org/api/sentiment-analysis",
                             data={'text': baggageFeesTweet.tweet},
@@ -36,10 +36,11 @@ class Command(BaseCommand):
                         score-=1
                     elif x == "Positive":
                         score+=1
-                aggregateCreated = AmericanAggregateModel.objects.get_or_create(tweet_id=baggageFeesTweet.id, name=str(baggageFeesTweet.username), text=str(baggageFeesTweet.tweet), link=str(baggageFeesTweet.link), date=baggageFeesTweet.datestamp, prediction_level=score, category="baggage-fees")
+                    
+                aggregateCreated = SpiritAggregateModel.objects.get_or_create(tweet_id=baggageFeesTweet.id, name=str(baggageFeesTweet.username), text=str(baggageFeesTweet.tweet), link=str(baggageFeesTweet.link), date=baggageFeesTweet.datestamp, prediction_level=score, category="baggage-fees")
 
-        # Update AmericanCondensedModel
-        tweets = AmericanAggregateModel.objects.all()
+        # Update SpiritCondensedModel
+        tweets = SpiritAggregateModel.objects.all()
         score = 0
         count = 0
         for tweet in tweets:
@@ -49,5 +50,4 @@ class Command(BaseCommand):
         averageScore = 0
         if not count == 0:
             averageScore = score / count
-
-        condensedCreated = AmericanCondensedModel.objects.get_or_create(date=timezone.now(), average_prediction=averageScore, category="baggage-fees")
+        condensedCreated = SpiritCondensedModel.objects.get_or_create(date=timezone.now(), average_prediction=averageScore, category="baggage-fees")
