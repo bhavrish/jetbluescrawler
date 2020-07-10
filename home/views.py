@@ -4,314 +4,181 @@ import requests
 
 from datetime import datetime
 
-# Create your views here.
+# Home endpoint
 def home(request):
-	# JetBlue ------------------------------------------------------------------------------------
-	jetBlueTweets = JetblueCondensedModel.objects.all()
-	jetblueAvailabilityTweets = []
-	jetblueCostTweets = []
-	jetblueLegroomTweets = []
-	jetblueTimeTweets = []
-	jetblueOverallTweetsDict = {}
-	
-	jetBlueAvailabilitySum = 0
-	jetBlueCostSum = 0
-	jetBlueLegroomSum = 0
-	jetBlueTimeSum = 0
+	airlineInfoList = [
+	{'modelObjects': JetblueCondensedModel.objects.all(), 'name': "JETBLUE", 'imageURL': 'https://images.unsplash.com/photo-1576128343868-ba0ea33570a6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&q=80&crop=edges&ar=96:69'},
+	{'modelObjects': AmericanCondensedModel.objects.all(), 'name': "AMERICAN", 'imageURL': 'https://images.unsplash.com/photo-1532973497172-04b34d604825?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1341&q=80&ar=96:69'},
+	{'modelObjects': UnitedCondensedModel.objects.all(), 'name': "UNITED", 'imageURL': 'https://images.unsplash.com/photo-1473862170180-84427c485aca?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80&ar=96:69'},
+	{'modelObjects': SpiritCondensedModel.objects.all(), 'name': "SPIRIT", 'imageURL': 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Spirit_Airlines_Airbus_A321-231_N677NK_approaching_Newark_Airport.jpg/1280px-Spirit_Airlines_Airbus_A321-231_N677NK_approaching_Newark_Airport.jpg'}
+	]
 
-	jetBlueAvailabilityItems = 0
-	jetBlueCostItems = 0
-	jetBlueLegroomItems = 0
-	jetBlueTimeItems = 0
-	for tweet in jetBlueTweets:
-		tweet.date = tweet.date.strftime("%m/%d/%Y")
-		if tweet.category == 'availability':
-			jetblueAvailabilityTweets.append(tweet)
-			jetBlueAvailabilitySum += tweet.average_prediction
-			jetBlueAvailabilityItems += 1
+	for airline in airlineInfoList:
+		modelObjects = airline['modelObjects']
 
-		elif tweet.category == 'cost':
-			jetblueCostTweets.append(tweet)
-			jetBlueCostSum += tweet.average_prediction
-			jetBlueCostItems += 1
+		OverallDict = {}
+		AvailabilityDict = {}
+		CostDict = {}
+		LegroomDict = {}
+		TimeDict = {}
+		BaggageFeesDict = {}
+		HiddenFeesDict = {}
+		ConnectionsDict = {}
+		FamilyOptionsDict = {}
+		FoodEntertainmentDict = {}
+		ReimbursementDict = {}
+		ServiceDict = {}
+		TravelRewardsDict = {}
+		
+		# iterate over condensed objects and filter each object into respective category dictionary
+		for modelObject in modelObjects:
+			modelObject.date = modelObject.date.strftime("%m/%d/%Y")
+			if modelObject.category == 'availability':
+				AvailabilityDict[modelObject.date] = modelObject.average_prediction
+			elif modelObject.category == 'cost':
+				CostDict[modelObject.date] = modelObject.average_prediction
+			elif modelObject.category == 'legroom':
+				LegroomDict[modelObject.date] = modelObject.average_prediction
+			elif modelObject.category == 'timeliness':
+				TimeDict[modelObject.date] = modelObject.average_prediction
+			elif modelObject.category == 'baggage-fees':
+				BaggageFeesDict[modelObject.date] = modelObject.average_prediction
+			elif modelObject.category == 'hidden-fees':
+				HiddenFeesDict[modelObject.date] = modelObject.average_prediction
+			elif modelObject.category == 'connections':
+				ConnectionsDict[modelObject.date] = modelObject.average_prediction
+			elif modelObject.category == 'family-options':
+				FamilyOptionsDict[modelObject.date] = modelObject.average_prediction
+			elif modelObject.category == 'food-entertainment':
+				FoodEntertainmentDict[modelObject.date] = modelObject.average_prediction
+			elif modelObject.category == 'reimbursement':
+				ReimbursementDict[modelObject.date] = modelObject.average_prediction
+			elif modelObject.category == 'service':
+				ServiceDict[modelObject.date] = modelObject.average_prediction
+			elif modelObject.category == 'travel-rewards':
+				TravelRewardsDict[modelObject.date] = modelObject.average_prediction
+			
+			if modelObject.date in OverallDict:
+				OverallDict[modelObject.date] += modelObject.average_prediction
+			else:
+				OverallDict[modelObject.date] = modelObject.average_prediction
 
-		elif tweet.category == 'legroom':
-			jetblueLegroomTweets.append(tweet)
-			jetBlueLegroomSum += tweet.average_prediction
-			jetBlueLegroomItems += 1
+		# update category scores and overall scores
+		AvailabilitySum = 0
+		AvailabilityScore = 0
+		for date in AvailabilityDict:
+			AvailabilitySum += AvailabilityDict[date]
+		if not len(AvailabilityDict) == 0:
+			AvailabilityScore = AvailabilitySum / (len(AvailabilityDict))
 
-		elif tweet.category == 'timeliness':
-			jetblueTimeTweets.append(tweet)
-			jetBlueTimeSum += tweet.average_prediction
-			jetBlueTimeItems += 1
+		CostSum = 0
+		CostScore = 0
+		for date in CostDict:
+			CostSum += CostDict[date]
+		if not len(CostDict) == 0:	
+			CostScore = CostSum / (len(CostDict))
 
-		if tweet.date in jetblueOverallTweetsDict:
-  			jetblueOverallTweetsDict[tweet.date] += tweet.average_prediction
-		else:
-			jetblueOverallTweetsDict[tweet.date] = tweet.average_prediction
+		LegroomSum = 0
+		LegroomScore = 0
+		for date in LegroomDict:
+			LegroomSum += LegroomDict[date]
+		if not len(LegroomDict) == 0:
+			LegroomScore = LegroomSum / (len(LegroomDict))
 
-	jetBlueAvailabilityScore = 0
-	if not jetBlueAvailabilityItems == 0:
-		jetBlueAvailabilityScore = jetBlueAvailabilitySum / jetBlueAvailabilityItems
+		TimeSum = 0
+		TimeScore = 0
+		for date in TimeDict:
+			TimeSum += TimeDict[date]
+		if not len(TimeDict) == 0:
+			TimeScore = TimeSum / (len(TimeDict))
+		
+		BaggageFeesSum = 0
+		BaggageFeesScore = 0
+		for date in BaggageFeesDict:
+			BaggageFeesSum += BaggageFeesDict[date]
+		if not len(BaggageFeesDict) == 0:
+			BaggageFeesScore = BaggageFeesSum / (len(BaggageFeesDict))
 
-	jetBlueCostScore = 0
-	if not jetBlueCostItems == 0:	
-		jetBlueCostScore = jetBlueCostSum / jetBlueCostItems
+		HiddenFeesSum = 0
+		HiddenFeesScore = 0
+		for date in HiddenFeesDict:
+			HiddenFeesSum += HiddenFeesDict[date]
+		if not len(HiddenFeesDict) == 0:
+			HiddenFeesScore = HiddenFeesSum / (len(HiddenFeesDict))
 
-	jetBlueLegroomScore = 0
-	if not jetBlueLegroomItems == 0:
-		jetBlueLegroomScore = jetBlueLegroomSum / jetBlueLegroomItems
+		ConnectionsSum = 0
+		ConnectionsScore = 0
+		for date in ConnectionsDict:
+			ConnectionsSum += ConnectionsDict[date]
+		if not len(ConnectionsDict) == 0:
+			ConnectionsScore = ConnectionsSum / (len(ConnectionsDict))
 
-	jetBlueTimeScore = 0
-	if not jetBlueTimeItems == 0:
-		jetBlueTimeScore = jetBlueTimeSum / jetBlueTimeItems
-	
-	jetBlueOverallScore = (jetBlueAvailabilityScore + jetBlueCostScore + jetBlueLegroomScore + jetBlueTimeScore)/4
-	
-	jetBlueInfoDict = {
-		'AvailabilityScore': jetBlueAvailabilityScore,
-		'CostScore': jetBlueCostScore,
-		'LegroomScore': jetBlueLegroomScore,
-		'TimeScore': jetBlueTimeScore,
-		'OverallScore': jetBlueOverallScore,
-		'OverallTweetsDict': jetblueOverallTweetsDict,
-		'AvailabilityTweets': jetblueAvailabilityTweets,
-		'CostTweets': jetblueCostTweets,
-		'LegroomTweets': jetblueLegroomTweets,
-		'TimeTweets': jetblueTimeTweets,
-		'name': 'JETBLUE',
-		'imageURL': 'https://images.unsplash.com/photo-1576128343868-ba0ea33570a6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&q=80&crop=edges&ar=96:69',
-	}
+		FamilyOptionsSum = 0
+		FamilyOptionsScore = 0
+		for date in FamilyOptionsDict:
+			FamilyOptionsSum += FamilyOptionsDict[date]
+		if not len(FamilyOptionsDict) == 0:
+			FamilyOptionsScore = FamilyOptionsSum / (len(FamilyOptionsDict))
 
-	# American Airlines ------------------------------------------------------------------------------------
-	americanTweets = AmericanCondensedModel.objects.all()
-	americanAvailabilityTweets = []
-	americanCostTweets = []
-	americanLegroomTweets = []
-	americanTimeTweets = []
-	americanOverallTweetsDict = {}
-	
-	americanAvailabilitySum = 0
-	americanCostSum = 0
-	americanLegroomSum = 0
-	americanTimeSum = 0
+		FoodEntertainmentSum = 0
+		FoodEntertainmentScore = 0
+		for date in FoodEntertainmentDict:
+			FoodEntertainmentSum += FoodEntertainmentDict[date]
+		if not len(FoodEntertainmentDict) == 0:
+			FoodEntertainmentScore = FoodEntertainmentSum / (len(FoodEntertainmentDict))
 
-	americanAvailabilityItems = 0
-	americanCostItems = 0
-	americanLegroomItems = 0
-	americanTimeItems = 0
-	for tweet in americanTweets:
-		if tweet.category == 'availability':
-			americanAvailabilityTweets.append(tweet)
-			americanAvailabilitySum += tweet.average_prediction
-			americanAvailabilityItems += 1
+		ReimbursementSum = 0
+		ReimbursementScore = 0
+		for date in ReimbursementDict:
+			ReimbursementSum += ReimbursementDict[date]
+		if not len(ReimbursementDict) == 0:
+			ReimbursementScore = ReimbursementSum / (len(ReimbursementDict))
 
-		elif tweet.category == 'cost':
-			americanCostTweets.append(tweet)
-			americanCostSum += tweet.average_prediction
-			americanCostItems += 1
+		ServiceSum = 0
+		ServiceScore = 0
+		for date in ServiceDict:
+			ServiceSum += ServiceDict[date]
+		if not len(ServiceDict) == 0:
+			ServiceScore = ServiceSum / (len(ServiceDict))
 
-		elif tweet.category == 'legroom':
-			americanLegroomTweets.append(tweet)
-			americanLegroomSum += tweet.average_prediction
-			americanLegroomItems += 1
+		TravelRewardsSum = 0
+		TravelRewardsScore = 0
+		for date in TravelRewardsDict:
+			TravelRewardsSum += TravelRewardsDict[date]
+		if not len(TravelRewardsDict) == 0:
+			TravelRewardsScore = TravelRewardsSum / (len(TravelRewardsDict))
 
-		elif tweet.category == 'timeliness':
-			americanTimeTweets.append(tweet)
-			americanTimeSum += tweet.average_prediction
-			americanTimeItems += 1
+		OverallScore = (AvailabilityScore + CostScore + LegroomScore + TimeScore + BaggageFeesScore + HiddenFeesScore + ConnectionsScore + FamilyOptionsScore + FoodEntertainmentScore + ReimbursementScore + ServiceScore + TravelRewardsScore)/12
+		
+		airline['OverallScore'] = OverallScore
+		airline['AvailabilityScore'] = AvailabilityScore
+		airline['CostScore'] = CostScore
+		airline['LegroomScore'] = LegroomScore
+		airline['TimeScore'] = TimeScore
+		airline['BaggageFeesScore'] = BaggageFeesScore
+		airline['HiddenFeesScore'] = HiddenFeesScore
+		airline['ConnectionsScore'] = ConnectionsScore
+		airline['FamilyOptionsScore'] = FamilyOptionsScore
+		airline['FoodEntertainmentScore'] = FoodEntertainmentScore
+		airline['ReimbursementScore'] = ReimbursementScore
+		airline['ServiceScore'] = ServiceScore
+		airline['TravelRewardsScore'] = TravelRewardsScore
 
-		if tweet.date in americanOverallTweetsDict:
-  			americanOverallTweetsDict[tweet.date] += tweet.average_prediction
-		else:
-			americanOverallTweetsDict[tweet.date] = tweet.average_prediction
+		airline['OverallTweetsDict'] = OverallDict
+		airline['AvailabilityDict'] = AvailabilityDict
+		airline['CostDict'] = CostDict
+		airline['LegroomDict'] = LegroomDict
+		airline['TimeDict'] = TimeDict
+		airline['BaggageFeesDict'] = BaggageFeesDict
+		airline['HiddenFeesDict'] = HiddenFeesDict
+		airline['ConnectionsDict'] = ConnectionsDict
+		airline['FamilyOptionsDict'] = FamilyOptionsDict
+		airline['FoodEntertainmentDict'] = FoodEntertainmentDict
+		airline['ReimbursementDict'] = ReimbursementDict
+		airline['ServiceDict'] = ServiceDict
+		airline['TravelRewardsDict'] = TravelRewardsDict
 
-	americanAvailabilityScore = 0
-	if not americanAvailabilityItems == 0:
-		americanAvailabilityScore = americanAvailabilitySum / americanAvailabilityItems
 
-	americanCostScore = 0
-	if not americanCostItems == 0:	
-		americanCostScore = americanCostSum / americanCostItems
-
-	americanLegroomScore = 0
-	if not americanLegroomItems == 0:
-		americanLegroomScore = americanLegroomSum / americanLegroomItems
-
-	americanTimeScore = 0
-	if not americanTimeItems == 0:
-		americanTimeScore = americanTimeSum / americanTimeItems
-	
-	americanOverallScore = (americanAvailabilityScore + americanCostScore + americanLegroomScore + americanTimeScore)/4
-	
-	americanInfoDict = {
-		'AvailabilityScore': americanAvailabilityScore,
-		'CostScore': americanCostScore,
-		'LegroomScore': americanLegroomScore,
-		'TimeScore': americanTimeScore,
-		'OverallScore': americanOverallScore,
-		'OverallTweetsDict': americanOverallTweetsDict,
-		'AvailabilityTweets': americanAvailabilityTweets,
-		'CostTweets': americanCostTweets,
-		'LegroomTweets': americanLegroomTweets,
-		'TimeTweets': americanTimeTweets,
-		'name': 'AMERICAN',
-		'imageURL': 'https://images.unsplash.com/photo-1532973497172-04b34d604825?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1341&q=80&ar=96:69',
-	}
-
-	# United Airlines ------------------------------------------------------------------------------------
-	unitedTweets = UnitedCondensedModel.objects.all()
-	unitedAvailabilityTweets = []
-	unitedCostTweets = []
-	unitedLegroomTweets = []
-	unitedTimeTweets = []
-	unitedOverallTweetsDict = {}
-	
-	unitedAvailabilitySum = 0
-	unitedCostSum = 0
-	unitedLegroomSum = 0
-	unitedTimeSum = 0
-
-	unitedAvailabilityItems = 0
-	unitedCostItems = 0
-	unitedLegroomItems = 0
-	unitedTimeItems = 0
-	for tweet in unitedTweets:
-		if tweet.category == 'availability':
-			unitedAvailabilityTweets.append(tweet)
-			unitedAvailabilitySum += tweet.average_prediction
-			unitedAvailabilityItems += 1
-
-		elif tweet.category == 'cost':
-			unitedCostTweets.append(tweet)
-			unitedCostSum += tweet.average_prediction
-			unitedCostItems += 1
-
-		elif tweet.category == 'legroom':
-			unitedLegroomTweets.append(tweet)
-			unitedLegroomSum += tweet.average_prediction
-			unitedLegroomItems += 1
-
-		elif tweet.category == 'timeliness':
-			unitedTimeTweets.append(tweet)
-			unitedTimeSum += tweet.average_prediction
-			unitedTimeItems += 1
-
-		if tweet.date in unitedOverallTweetsDict:
-  			unitedOverallTweetsDict[tweet.date] += tweet.average_prediction
-		else:
-			unitedOverallTweetsDict[tweet.date] = tweet.average_prediction
-
-	unitedAvailabilityScore = 0
-	if not unitedAvailabilityItems == 0:
-		unitedAvailabilityScore = unitedAvailabilitySum / unitedAvailabilityItems
-
-	unitedCostScore = 0
-	if not unitedCostItems == 0:	
-		unitedCostScore = unitedCostSum / unitedCostItems
-
-	unitedLegroomScore = 0
-	if not unitedLegroomItems == 0:
-		unitedLegroomScore = unitedLegroomSum / unitedLegroomItems
-
-	unitedTimeScore = 0
-	if not unitedTimeItems == 0:
-		unitedTimeScore = unitedTimeSum / unitedTimeItems
-	
-	unitedOverallScore = (unitedAvailabilityScore + unitedCostScore + unitedLegroomScore + unitedTimeScore)/4
-	
-	unitedInfoDict = {
-		'AvailabilityScore': unitedAvailabilityScore,
-		'CostScore': unitedCostScore,
-		'LegroomScore': unitedLegroomScore,
-		'TimeScore': unitedTimeScore,
-		'OverallScore': unitedOverallScore,
-		'OverallTweetsDict': unitedOverallTweetsDict,
-		'AvailabilityTweets': unitedAvailabilityTweets,
-		'CostTweets': unitedCostTweets,
-		'LegroomTweets': unitedLegroomTweets,
-		'TimeTweets': unitedTimeTweets,
-		'name': 'UNITED',
-		'imageURL': 'https://images.unsplash.com/photo-1473862170180-84427c485aca?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80&ar=96:69'
-	}
-
-	# Spirit Airlines ------------------------------------------------------------------------------------
-	spiritTweets = SpiritCondensedModel.objects.all()
-	spiritAvailabilityTweets = []
-	spiritCostTweets = []
-	spiritLegroomTweets = []
-	spiritTimeTweets = []
-	spiritOverallTweetsDict = {}
-	
-	spiritAvailabilitySum = 0
-	spiritCostSum = 0
-	spiritLegroomSum = 0
-	spiritTimeSum = 0
-
-	spiritAvailabilityItems = 0
-	spiritCostItems = 0
-	spiritLegroomItems = 0
-	spiritTimeItems = 0
-	for tweet in spiritTweets:
-		if tweet.category == 'availability':
-			spiritAvailabilityTweets.append(tweet)
-			spiritAvailabilitySum += tweet.average_prediction
-			spiritAvailabilityItems += 1
-
-		elif tweet.category == 'cost':
-			spiritCostTweets.append(tweet)
-			spiritCostSum += tweet.average_prediction
-			spiritCostItems += 1
-
-		elif tweet.category == 'legroom':
-			spiritLegroomTweets.append(tweet)
-			spiritLegroomSum += tweet.average_prediction
-			spiritLegroomItems += 1
-
-		elif tweet.category == 'timeliness':
-			spiritTimeTweets.append(tweet)
-			spiritTimeSum += tweet.average_prediction
-			spiritTimeItems += 1
-
-		if tweet.date in spiritOverallTweetsDict:
-  			spiritOverallTweetsDict[tweet.date] += tweet.average_prediction
-		else:
-			spiritOverallTweetsDict[tweet.date] = tweet.average_prediction
-
-	spiritAvailabilityScore = 0
-	if not spiritAvailabilityItems == 0:
-		spiritAvailabilityScore = spiritAvailabilitySum / spiritAvailabilityItems
-
-	spiritCostScore = 0
-	if not spiritCostItems == 0:	
-		spiritCostScore = spiritCostSum / spiritCostItems
-
-	spiritLegroomScore = 0
-	if not spiritLegroomItems == 0:
-		spiritLegroomScore = spiritLegroomSum / spiritLegroomItems
-
-	spiritTimeScore = 0
-	if not spiritTimeItems == 0:
-		spiritTimeScore = spiritTimeSum / spiritTimeItems
-	
-	spiritOverallScore = (spiritAvailabilityScore + spiritCostScore + spiritLegroomScore + spiritTimeScore)/4
-	
-	spiritInfoDict = {
-		'AvailabilityScore': spiritAvailabilityScore,
-		'CostScore': spiritCostScore,
-		'LegroomScore': spiritLegroomScore,
-		'TimeScore': spiritTimeScore,
-		'OverallScore': spiritOverallScore,
-		'OverallTweetsDict': spiritOverallTweetsDict,
-		'AvailabilityTweets': spiritAvailabilityTweets,
-		'CostTweets': spiritCostTweets,
-		'LegroomTweets': spiritLegroomTweets,
-		'TimeTweets': spiritTimeTweets,
-		'name': "SPIRIT",
-		'imageURL': "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Spirit_Airlines_Airbus_A321-231_N677NK_approaching_Newark_Airport.jpg/1280px-Spirit_Airlines_Airbus_A321-231_N677NK_approaching_Newark_Airport.jpg",
-	}
-
-	airlineInfoList = [jetBlueInfoDict, americanInfoDict, unitedInfoDict, spiritInfoDict]
 	return render(request,'index.html', {'airlineInfoList':airlineInfoList})
 
 def react(request):
