@@ -14,7 +14,7 @@ def home(request):
 	]
 
 	for airline in airlineInfoList:
-		modelObjects = ['modelObjects']
+		modelObjects = airline['modelObjects']
 
 		OverallDict = {}
 		AvailabilityDict = {}

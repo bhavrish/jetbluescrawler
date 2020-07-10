@@ -86,19 +86,19 @@
                                     </tr>
                                     <tr>
                                         <td>Hidden Fees</td>
-                                        <td class="has-text-right">8</td>
+                                        <td class="has-text-right">{{ airline.HiddenFeesScore }}</td>
                                     </tr>
                                     <tr>
                                         <td>Baggage Fees</td>
-                                        <td class="has-text-right">-4</td>
+                                        <td class="has-text-right">{{ airline.BaggageFeesScore }}</td>
                                     </tr>
                                     <tr>
                                         <td>Travel Rewards</td>
-                                        <td class="has-text-right">3</td>
+                                        <td class="has-text-right">{{ airline.TravelRewardsScore }}</td>
                                     </tr>
                                     <tr>
                                         <td>Reimbursement</td>
-                                        <td class="has-text-right">6</td>
+                                        <td class="has-text-right">{{ airline.ReimbursementScore }}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -114,7 +114,7 @@
                                     </tr>
                                     <tr>
                                         <td>Integration w/ Other Airlines</td>
-                                        <td class="has-text-right">-2</td>
+                                        <td class="has-text-right">{{ airline.ConnectionsScore }}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -126,11 +126,11 @@
                                     </tr>
                                     <tr>
                                         <td>Food and Entertainment</td>
-                                        <td class="has-text-right">6</td>
+                                        <td class="has-text-right">{{ airline.FoodEntertainmentScore }}</td>
                                     </tr>
                                     <tr>
                                         <td>Service</td>
-                                        <td class="has-text-right">1</td>
+                                        <td class="has-text-right">{{ airline.ServiceScore }}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -138,7 +138,7 @@
                                 <tbody>
                                     <tr>
                                         <td>Family Options &nbsp;&nbsp;&nbsp;</td>
-                                        <td class="has-text-right">-1.82</td>
+                                        <td class="has-text-right">{{ airline.FamilyOptionsScore }}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -149,7 +149,44 @@
             </section>
     
             <section id="charts" class="section">
-                <div class="ct-chart ct-golden-section" id="chart1"></div>
+                <h3 class="has-text-centered has-text-white-ter is-size-2 column">Overall Scores</h3>
+                <div class="ct-chart ct-golden-section" id="chart0"></div>
+                <div class="level level-title">
+                    <h3 class="has-text-centered has-text-white-ter is-size-4 column">Cost</h3>
+                    <h3 class="has-text-centered has-text-white-ter is-size-4 column">Hidden Fees</h3>
+                    <h3 class="has-text-centered has-text-white-ter is-size-4 column">Baggage Fees</h3>
+                    <h3 class="has-text-centered has-text-white-ter is-size-4 column">Travel Rewards</h3>
+                </div>
+                <div class="level">               
+                    <div class="ct-chart ct-golden-section column" id="chart1"></div>
+                    <div class="ct-chart ct-golden-section column" id="chart2"></div>
+                    <div class="ct-chart ct-golden-section column" id="chart3"></div>
+                    <div class="ct-chart ct-golden-section column" id="chart4"></div>
+                </div>
+                <div class="level level-title">
+                    <h3 class="has-text-centered has-text-white-ter is-size-4 column">Reimbursements</h3>
+                    <h3 class="has-text-centered has-text-white-ter is-size-4 column">Timeliness</h3>
+                    <h3 class="has-text-centered has-text-white-ter is-size-4 column">Availability</h3>
+                    <h3 class="has-text-centered has-text-white-ter is-size-4 column">Airline Integration</h3>
+                </div>
+                <div class="level">
+                    <div class="ct-chart ct-golden-section" id="chart5"></div>                    
+                    <div class="ct-chart ct-golden-section" id="chart6"></div>
+                    <div class="ct-chart ct-golden-section" id="chart7"></div>
+                    <div class="ct-chart ct-golden-section" id="chart8"></div>
+                </div>
+                <div class="level level-title">
+                    <h3 class="has-text-centered has-text-white-ter is-size-4 column">Leg Room</h3>
+                    <h3 class="has-text-centered has-text-white-ter is-size-4 column">Food and Entertainment</h3>
+                    <h3 class="has-text-centered has-text-white-ter is-size-4 column">Service</h3>
+                    <h3 class="has-text-centered has-text-white-ter is-size-4 column">Family Options</h3>
+                </div>
+                <div class="level">
+                    <div class="ct-chart ct-golden-section" id="chart9"></div>
+                    <div class="ct-chart ct-golden-section" id="chart10"></div>
+                    <div class="ct-chart ct-golden-section" id="chart11"></div>
+                    <div class="ct-chart ct-golden-section" id="chart12"></div>
+                </div>
             </section>
     
             <section id="methodology" class="section has-text-white-ter">
@@ -176,9 +213,10 @@
             </section>
         </div>
         <script>
-            console.log("{{ airlineInfoList.0.OverallTweetsDict }}");
+            console.log("{{ airlineInfoList.0.OverallTweetsDict.items }}")
+            console.log("{{ airlineInfoList.0.AvailabilityDict.items }}")
             /* overall scores*/
-            new Chartist.Line('#chart1', {
+            new Chartist.Line('#chart0', {
                 series: [
                     {% for airline in airlineInfoList %}
                         {
@@ -195,6 +233,186 @@
                     Chartist.plugins.legend(),
                 ],
             });
+
+            new Chartist.Line("#chart1", {
+                series: [
+                    {% for airline in airlineInfoList %}
+                        {
+                            name: '{{ airline.name }}',
+                            data: [
+                                {% for p, d in airline.CostDict.items %}
+                                    {x: "{{ p }}", y: "{{ d }}" },
+                                {% endfor %}
+                            ],
+                        },
+                    {% endfor %}
+                ]
+            })
+
+            new Chartist.Line("#chart2", {
+                series: [
+                    {% for airline in airlineInfoList %}
+                        {
+                            name: '{{ airline.name }}',
+                            data: [
+                                {% for p, d in airline.HiddenFeesDict.items %}
+                                    {x: "{{ p }}", y: "{{ d }}" },
+                                {% endfor %}
+                            ],
+                        },
+                    {% endfor %}
+                ]
+            })
+
+            new Chartist.Line("#chart3", {
+                series: [
+                    {% for airline in airlineInfoList %}
+                        {
+                            name: '{{ airline.name }}',
+                            data: [
+                                {% for p, d in airline.BaggageFeesDict.items %}
+                                    {x: "{{ p }}", y: "{{ d }}" },
+                                {% endfor %}
+                            ],
+                        },
+                    {% endfor %}
+                ]
+            })
+
+            new Chartist.Line("#chart4", {
+                series: [
+                    {% for airline in airlineInfoList %}
+                        {
+                            name: '{{ airline.name }}',
+                            data: [
+                                {% for p, d in airline.TravelRewardsDict.items %}
+                                    {x: "{{ p }}", y: "{{ d }}" },
+                                {% endfor %}
+                            ],
+                        },
+                    {% endfor %}
+                ]
+            })
+
+            new Chartist.Line("#chart5", {
+                series: [
+                    {% for airline in airlineInfoList %}
+                        {
+                            name: '{{ airline.name }}',
+                            data: [
+                                {% for p, d in airline.ReimbursementDict.items %}
+                                    {x: "{{ p }}", y: "{{ d }}" },
+                                {% endfor %}
+                            ],
+                        },
+                    {% endfor %}
+                ]
+            })
+
+            new Chartist.Line("#chart6", {
+                series: [
+                    {% for airline in airlineInfoList %}
+                        {
+                            name: '{{ airline.name }}',
+                            data: [
+                                {% for p, d in airline.TimeDict.items %}
+                                    {x: "{{ p }}", y: "{{ d }}" },
+                                {% endfor %}
+                            ],
+                        },
+                    {% endfor %}
+                ]
+            })
+
+            new Chartist.Line("#chart7", {
+                series: [
+                    {% for airline in airlineInfoList %}
+                        {
+                            name: '{{ airline.name }}',
+                            data: [
+                                {% for p, d in airline.AvailabilityDict.items %}
+                                    {x: "{{ p }}", y: "{{ d }}" },
+                                {% endfor %}
+                            ],
+                        },
+                    {% endfor %}
+                ]
+            })
+
+            new Chartist.Line("#chart8", {
+                series: [
+                    {% for airline in airlineInfoList %}
+                        {
+                            name: '{{ airline.name }}',
+                            data: [
+                                {% for p, d in airline.ConnectionsDict.items %}
+                                    {x: "{{ p }}", y: "{{ d }}" },
+                                {% endfor %}
+                            ],
+                        },
+                    {% endfor %}
+                ]
+            })
+
+            new Chartist.Line("#chart9", {
+                series: [
+                    {% for airline in airlineInfoList %}
+                        {
+                            name: '{{ airline.name }}',
+                            data: [
+                                {% for p, d in airline.LegroomDict.items %}
+                                    {x: "{{ p }}", y: "{{ d }}" },
+                                {% endfor %}
+                            ],
+                        },
+                    {% endfor %}
+                ]
+            })
+
+            new Chartist.Line("#chart10", {
+                series: [
+                    {% for airline in airlineInfoList %}
+                        {
+                            name: '{{ airline.name }}',
+                            data: [
+                                {% for p, d in airline.FoodEntertainmentDict.items %}
+                                    {x: "{{ p }}", y: "{{ d }}" },
+                                {% endfor %}
+                            ],
+                        },
+                    {% endfor %}
+                ]
+            })
+
+            new Chartist.Line("#chart11", {
+                series: [
+                    {% for airline in airlineInfoList %}
+                        {
+                            name: '{{ airline.name }}',
+                            data: [
+                                {% for p, d in airline.ServiceDict.items %}
+                                    {x: "{{ p }}", y: "{{ d }}" },
+                                {% endfor %}
+                            ],
+                        },
+                    {% endfor %}
+                ]
+            })
+
+            new Chartist.Line("#chart12", {
+                series: [
+                    {% for airline in airlineInfoList %}
+                        {
+                            name: '{{ airline.name }}',
+                            data: [
+                                {% for p, d in airline.FamilyOptionsDict.items %}
+                                    {x: "{{ p }}", y: "{{ d }}" },
+                                {% endfor %}
+                            ],
+                        },
+                    {% endfor %}
+                ]
+            })
         </script>   
     </body>
 </html>
