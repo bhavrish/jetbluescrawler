@@ -198,7 +198,7 @@
                         In the midst of the coronavirus pandemic, we were curious to see how airline perception was faring. Perception and sentiment towards brands plays a large role in spending decisions.
                     </p>
                     <p>
-                        We decided to mine twitter for sentiment related to major airlines. We chose to segment our analysis by the different categories that people found influenced whether they would travel an airline. These categories were compiled from survey data via Google Forms. We then created weights for an overall score using <a href="https://www.statista.com/statistics/682161/important-factors-flight-purchase-us-travel/" class="is-hovered">Statista</a>. The sentiment model used is Stanford's <a href="https://deepai.org/machine-learning-model/sentiment-analysis" class="is-hovered">DeepAI model</a>. As an alternative, you can download the pytorch model we trained <a href="https://www.dropbox.com/s/8kzixo72ymoaw5v/export.pkl?dl=0" class="is-hovered">here</a>.
+                        We decided to mine twitter for sentiment related to major airlines. We chose to segment our analysis by the different categories that people found important for air travel. These categories were compiled from survey data via Google Forms. We then created weights for an overall score using <a href="https://www.statista.com/statistics/682161/important-factors-flight-purchase-us-travel/" class="is-hovered">Statista</a>. The sentiment model used is Stanford's <a href="https://deepai.org/machine-learning-model/sentiment-analysis" class="is-hovered">DeepAI model</a>. As an alternative, you can download the pytorch model we trained <a href="https://www.dropbox.com/s/8kzixo72ymoaw5v/export.pkl?dl=0" class="is-hovered">here</a>.
                     </p>
                     <p>
                         We proceeded to create cron jobs to continuously mine twitter for sentiment related to these categories in order to observe variance over time. We stored the scores we found, adjusted and averaged over tweets collected.
@@ -215,8 +215,6 @@
             </section>
         </div>
         <script>
-            console.log("{{ airlineInfoList.0.OverallTweetsDict.items }}")
-            console.log("{{ airlineInfoList.0.AvailabilityDict.items }}")
             /* overall scores*/
             new Chartist.Line('#chart0', {
                 series: [
