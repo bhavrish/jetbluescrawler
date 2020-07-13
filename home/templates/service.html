@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Service Tweets</title>
+    <style>
+      table {
+        table-layout: fixed ;
+        width: 100% ;
+        border: 1px solid white;
+      }
+      td {
+        width: 50% ;
+        border: 1px solid white;
+      }
+      h2 {
+        color: white;
+      }
+      p.prediction {
+        font-size: 50px;
+        color: white;
+      }
+    </style>
+  </head>
+  <body style="background-color:#00205B;">
+    <center>
+    <h2>{{ title }} Service Tweets</h2>
+    <table>
+    {% for serviceTweet in serviceTweets %}
+        <tr>
+          <td>
+            <center>
+              <p class="prediction">{{ serviceTweet.prediction_level }}</p>
+            </center>
+          </td>
+          <td>
+            <center>
+              <blockquote class="twitter-tweet"><p lang="en" dir="ltr">
+              <a href="{{ serviceTweet.link }}"></a></blockquote>
+              <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </center>
+          </td>
+        </tr>
+    {% endfor %}
+    </table>
+    </center>
+  </body>
+</html>

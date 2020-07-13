@@ -186,326 +186,486 @@ def react(request):
 
 
 # ------------------------------------------ JetBlue ------------------------------------------
-def availabilitybad(request):
+def availability(request):
 	tweets = JetblueAggregateModel.objects.all()
-	negativeAvailableTweets = []
+	availableTweets = []
 
 	for tweet in tweets:
-		if tweet.category == 'availability' and tweet.prediction_level < 0:
-			negativeAvailableTweets.append(tweet)
+		if tweet.category == 'availability':
+			availableTweets.append(tweet)
 
-	return render(request, 'availabilitybad.html', {'availableTweets':negativeAvailableTweets, 'title':'JetBlue'})
-	
-def availabilitygood(request):
+	return render(request, 'availability.html', {'availableTweets':availableTweets, 'title':'JetBlue'})
+
+def cost(request):
 	tweets = JetblueAggregateModel.objects.all()
-	positiveAvailableTweets = []
+	costTweets = []
 
 	for tweet in tweets:
-		if tweet.category == 'availability' and tweet.prediction_level >= 0:
-			positiveAvailableTweets.append(tweet)
+		if tweet.category == 'cost':
+			costTweets.append(tweet)
 
-	return render(request, 'availabilitygood.html', {'availableTweets':positiveAvailableTweets, 'title':'JetBlue'})
+	return render(request, 'cost.html', {"costTweets":costTweets, 'title':'JetBlue'})
 
-def costbad(request):
+def legroom(request):
 	tweets = JetblueAggregateModel.objects.all()
-	negativeCostTweets = []
+	legroomTweets = []
 
 	for tweet in tweets:
-		if tweet.category == 'cost' and tweet.prediction_level < 0:
-			negativeCostTweets.append(tweet)
+		if tweet.category == 'legroom':
+			legroomTweets.append(tweet)
 
-	return render(request, 'costbad.html', {"costTweets":negativeCostTweets, 'title':'JetBlue'})
+	return render(request, 'legroom.html', {'legroomTweets':legroomTweets, 'title':'JetBlue'})
 
-def costgood(request):
+def timeliness(request):
 	tweets = JetblueAggregateModel.objects.all()
-	positiveCostTweets = []
+	timeTweets = []
 
 	for tweet in tweets:
-		if tweet.category == 'cost' and tweet.prediction_level >= 0:
-			positiveCostTweets.append(tweet)
+		if tweet.category == 'timeliness':
+			timeTweets.append(tweet)
 
-	return render(request, 'costgood.html', {"costTweets":positiveCostTweets, 'title':'JetBlue'})
+	return render(request, 'timeliness.html', {"timeTweets":timeTweets, 'title':'JetBlue'})
 
-def legroombad(request):
+def hiddenFees(request):
 	tweets = JetblueAggregateModel.objects.all()
-	negativeLegroomTweets = []
+	hiddenFeesTweets = []
 
 	for tweet in tweets:
-		if tweet.category == 'legroom' and tweet.prediction_level < 0:
-			negativeLegroomTweets.append(tweet)
+		if tweet.category == 'hidden-fees':
+			hiddenFeesTweets.append(tweet)
 
-	return render(request, 'legroombad.html', {'legroomTweets':negativeLegroomTweets, 'title':'JetBlue'})
+	return render(request, 'hiddenFees.html', {"hiddenFeesTweets":hiddenFeesTweets, 'title':'JetBlue'})
 
-def legroomgood(request):
+def baggageFees(request):
 	tweets = JetblueAggregateModel.objects.all()
-	positiveLegroomTweets = []
+	baggageFeesTweets = []
 
 	for tweet in tweets:
-		if tweet.category == 'legroom' and tweet.prediction_level >= 0:
-			positiveLegroomTweets.append(tweet)
+		if tweet.category == 'baggage-fees':
+			baggageFeesTweets.append(tweet)
 
-	return render(request, 'legroomgood.html', {'legroomTweets':positiveLegroomTweets, 'title':'JetBlue'})
+	return render(request, 'baggageFees.html', {"baggageFeesTweets":baggageFeesTweets, 'title':'JetBlue'})
 
-def timelinessbad(request):
+def travelRewards(request):
 	tweets = JetblueAggregateModel.objects.all()
-	negativeTimeTweets = []
+	travelRewardsTweets = []
 
 	for tweet in tweets:
-		if tweet.category == 'timeliness' and tweet.prediction_level < 0:
-			negativeTimeTweets.append(tweet)
+		if tweet.category == 'travel-rewards':
+			travelRewardsTweets.append(tweet)
 
-	return render(request, 'timelinessbad.html', {"timeTweets":negativeTimeTweets, 'title':'JetBlue'})
+	return render(request, 'travelRewards.html', {"travelRewardsTweets":travelRewardsTweets, 'title':'JetBlue'})
 
-def timelinessgood(request):
+def reimbursement(request):
 	tweets = JetblueAggregateModel.objects.all()
-	positiveTimeTweets = []
+	reimbursementTweets = []
 
 	for tweet in tweets:
-		if tweet.category == 'timeliness' and tweet.prediction_level >= 0:
-			positiveTimeTweets.append(tweet)
+		if tweet.category == 'reimbursement':
+			reimbursementTweets.append(tweet)
 
-	return render(request, 'timelinessgood.html', {"timeTweets":positiveTimeTweets, 'title':'JetBlue'})
+	return render(request, 'reimbursement.html', {"reimbursementTweets":reimbursementTweets, 'title':'JetBlue'})
+
+def connections(request):
+	tweets = JetblueAggregateModel.objects.all()
+	connectionsTweets = []
+
+	for tweet in tweets:
+		if tweet.category == 'connections':
+			connectionsTweets.append(tweet)
+
+	return render(request, 'connections.html', {"connectionsTweets":connectionsTweets, 'title':'JetBlue'})
+
+def foodEntertainment(request):
+	tweets = JetblueAggregateModel.objects.all()
+	foodEntertainmentTweets = []
+
+	for tweet in tweets:
+		if tweet.category == 'food-entertainment':
+			foodEntertainmentTweets.append(tweet)
+
+	return render(request, 'foodEntertainment.html', {"foodEntertainmentTweets":foodEntertainmentTweets, 'title':'JetBlue'})
+
+def service(request):
+	tweets = JetblueAggregateModel.objects.all()
+	serviceTweets = []
+
+	for tweet in tweets:
+		if tweet.category == 'service':
+			serviceTweets.append(tweet)
+
+	return render(request, 'service.html', {"serviceTweets":serviceTweets, 'title':'JetBlue'})
+
+def familyOptions(request):
+	tweets = JetblueAggregateModel.objects.all()
+	familyOptionsTweets = []
+
+	for tweet in tweets:
+		if tweet.category == 'family-options':
+			familyOptionsTweets.append(tweet)
+
+	return render(request, 'familyOptions.html', {"familyOptionsTweets":familyOptionsTweets, 'title':'JetBlue'})
 
 
 # ------------------------------------------ American Airlines ------------------------------------------
-def americanavailabilitybad(request):
+def americanAvailability(request):
 	tweets = AmericanAggregateModel.objects.all()
-	negativeAvailableTweets = []
+	availableTweets = []
 
 	for tweet in tweets:
-		if tweet.category == 'availability' and tweet.prediction_level < 0:
-			negativeAvailableTweets.append(tweet)
+		if tweet.category == 'availability':
+			availableTweets.append(tweet)
 
-	return render(request, 'availabilitybad.html', {'availableTweets':negativeAvailableTweets, 'title':'American Airlines'})
-	
-def americanavailabilitygood(request):
+	return render(request, 'availability.html', {'availableTweets':availableTweets, 'title':'American Airlines'})
+
+def americanCost(request):
 	tweets = AmericanAggregateModel.objects.all()
-	positiveAvailableTweets = []
+	costTweets = []
 
 	for tweet in tweets:
-		if tweet.category == 'availability' and tweet.prediction_level >= 0:
-			positiveAvailableTweets.append(tweet)
+		if tweet.category == 'cost':
+			costTweets.append(tweet)
 
-	return render(request, 'availabilitygood.html', {'availableTweets':positiveAvailableTweets, 'title':'American Airlines'})
+	return render(request, 'cost.html', {"costTweets":costTweets, 'title':'American Airlines'})
 
-def americancostbad(request):
+def americanLegroom(request):
 	tweets = AmericanAggregateModel.objects.all()
-	negativeCostTweets = []
+	legroomTweets = []
 
 	for tweet in tweets:
-		if tweet.category == 'cost' and tweet.prediction_level < 0:
-			negativeCostTweets.append(tweet)
+		if tweet.category == 'legroom':
+			legroomTweets.append(tweet)
 
-	return render(request, 'costbad.html', {"costTweets":negativeCostTweets, 'title':'American Airlines'})
+	return render(request, 'legroom.html', {'legroomTweets':legroomTweets, 'title':'American Airlines'})
 
-def americancostgood(request):
+def americanTimeliness(request):
 	tweets = AmericanAggregateModel.objects.all()
-	positiveCostTweets = []
+	timeTweets = []
 
 	for tweet in tweets:
-		if tweet.category == 'cost' and tweet.prediction_level >= 0:
-			positiveCostTweets.append(tweet)
+		if tweet.category == 'timeliness':
+			timeTweets.append(tweet)
 
-	return render(request, 'costgood.html', {"costTweets":positiveCostTweets, 'title':'American Airlines'})
+	return render(request, 'timeliness.html', {"timeTweets":timeTweets, 'title':'American Airlines'})
 
-def americanlegroombad(request):
+def americanHiddenFees(request):
 	tweets = AmericanAggregateModel.objects.all()
-	negativeLegroomTweets = []
+	hiddenFeesTweets = []
 
 	for tweet in tweets:
-		if tweet.category == 'legroom' and tweet.prediction_level < 0:
-			negativeLegroomTweets.append(tweet)
+		if tweet.category == 'hidden-fees':
+			hiddenFeesTweets.append(tweet)
 
-	return render(request, 'legroombad.html', {'legroomTweets':negativeLegroomTweets, 'title':'American Airlines'})
+	return render(request, 'hiddenFees.html', {"hiddenFeesTweets":hiddenFeesTweets, 'title':'American Airlines'})
 
-def americanlegroomgood(request):
+def americanBaggageFees(request):
 	tweets = AmericanAggregateModel.objects.all()
-	positiveLegroomTweets = []
+	baggageFeesTweets = []
 
 	for tweet in tweets:
-		if tweet.category == 'legroom' and tweet.prediction_level >= 0:
-			positiveLegroomTweets.append(tweet)
+		if tweet.category == 'baggage-fees':
+			baggageFeesTweets.append(tweet)
 
-	return render(request, 'legroomgood.html', {'legroomTweets':positiveLegroomTweets, 'title':'American Airlines'})
+	return render(request, 'baggageFees.html', {"baggageFeesTweets":baggageFeesTweets, 'title':'American Airlines'})
 
-def americantimelinessbad(request):
+def americanTravelRewards(request):
 	tweets = AmericanAggregateModel.objects.all()
-	negativeTimeTweets = []
+	travelRewardsTweets = []
 
 	for tweet in tweets:
-		if tweet.category == 'timeliness' and tweet.prediction_level < 0:
-			negativeTimeTweets.append(tweet)
+		if tweet.category == 'travel-rewards':
+			travelRewardsTweets.append(tweet)
 
-	return render(request, 'timelinessbad.html', {"timeTweets":negativeTimeTweets, 'title':'American Airlines'})
+	return render(request, 'travelRewards.html', {"travelRewardsTweets":travelRewardsTweets, 'title':'American Airlines'})
 
-def americantimelinessgood(request):
+def americanReimbursement(request):
 	tweets = AmericanAggregateModel.objects.all()
-	positiveTimeTweets = []
+	reimbursementTweets = []
 
 	for tweet in tweets:
-		if tweet.category == 'timeliness' and tweet.prediction_level >= 0:
-			positiveTimeTweets.append(tweet)
+		if tweet.category == 'reimbursement':
+			reimbursementTweets.append(tweet)
 
-	return render(request, 'timelinessgood.html', {"timeTweets":positiveTimeTweets, 'title':'American Airlines'})
+	return render(request, 'reimbursement.html', {"reimbursementTweets":reimbursementTweets, 'title':'American Airlines'})
+
+def americanConnections(request):
+	tweets = AmericanAggregateModel.objects.all()
+	connectionsTweets = []
+
+	for tweet in tweets:
+		if tweet.category == 'connections':
+			connectionsTweets.append(tweet)
+
+	return render(request, 'connections.html', {"connectionsTweets":connectionsTweets, 'title':'American Airlines'})
+
+def americanFoodEntertainment(request):
+	tweets = AmericanAggregateModel.objects.all()
+	foodEntertainmentTweets = []
+
+	for tweet in tweets:
+		if tweet.category == 'food-entertainment':
+			foodEntertainmentTweets.append(tweet)
+
+	return render(request, 'foodEntertainment.html', {"foodEntertainmentTweets":foodEntertainmentTweets, 'title':'American Airlines'})
+
+def americanService(request):
+	tweets = AmericanAggregateModel.objects.all()
+	serviceTweets = []
+
+	for tweet in tweets:
+		if tweet.category == 'service':
+			serviceTweets.append(tweet)
+
+	return render(request, 'service.html', {"serviceTweets":serviceTweets, 'title':'American Airlines'})
+
+def americanFamilyOptions(request):
+	tweets = AmericanAggregateModel.objects.all()
+	familyOptionsTweets = []
+
+	for tweet in tweets:
+		if tweet.category == 'family-options':
+			familyOptionsTweets.append(tweet)
+
+	return render(request, 'familyOptions.html', {"familyOptionsTweets":familyOptionsTweets, 'title':'American Airlines'})
 
 # ------------------------------------------ United Airlines ------------------------------------------
-def unitedavailabilitybad(request):
+def unitedAvailability(request):
 	tweets = UnitedAggregateModel.objects.all()
-	negativeAvailableTweets = []
+	availableTweets = []
 
 	for tweet in tweets:
-		if tweet.category == 'availability' and tweet.prediction_level < 0:
-			negativeAvailableTweets.append(tweet)
+		if tweet.category == 'availability':
+			availableTweets.append(tweet)
 
-	return render(request, 'availabilitybad.html', {'availableTweets':negativeAvailableTweets, 'title':'United Airlines'})
-	
-def unitedavailabilitygood(request):
+	return render(request, 'availability.html', {'availableTweets':availableTweets, 'title':'United Airlines'})
+
+def unitedCost(request):
 	tweets = UnitedAggregateModel.objects.all()
-	positiveAvailableTweets = []
+	costTweets = []
 
 	for tweet in tweets:
-		if tweet.category == 'availability' and tweet.prediction_level >= 0:
-			positiveAvailableTweets.append(tweet)
+		if tweet.category == 'cost':
+			costTweets.append(tweet)
 
-	return render(request, 'availabilitygood.html', {'availableTweets':positiveAvailableTweets, 'title':'United Airlines'})
+	return render(request, 'cost.html', {"costTweets":costTweets, 'title':'United Airlines'})
 
-def unitedcostbad(request):
+def unitedLegroom(request):
 	tweets = UnitedAggregateModel.objects.all()
-	negativeCostTweets = []
+	legroomTweets = []
 
 	for tweet in tweets:
-		if tweet.category == 'cost' and tweet.prediction_level < 0:
-			negativeCostTweets.append(tweet)
+		if tweet.category == 'legroom':
+			legroomTweets.append(tweet)
 
-	return render(request, 'costbad.html', {"costTweets":negativeCostTweets, 'title':'United Airlines'})
+	return render(request, 'legroom.html', {'legroomTweets':legroomTweets, 'title':'United Airlines'})
 
-def unitedcostgood(request):
+def unitedTimeliness(request):
 	tweets = UnitedAggregateModel.objects.all()
-	positiveCostTweets = []
+	timeTweets = []
 
 	for tweet in tweets:
-		if tweet.category == 'cost' and tweet.prediction_level >= 0:
-			positiveCostTweets.append(tweet)
+		if tweet.category == 'timeliness':
+			timeTweets.append(tweet)
 
-	return render(request, 'costgood.html', {"costTweets":positiveCostTweets, 'title':'United Airlines'})
+	return render(request, 'timeliness.html', {"timeTweets":timeTweets, 'title':'United Airlines'})
 
-def unitedlegroombad(request):
+def unitedHiddenFees(request):
 	tweets = UnitedAggregateModel.objects.all()
-	negativeLegroomTweets = []
+	hiddenFeesTweets = []
 
 	for tweet in tweets:
-		if tweet.category == 'legroom' and tweet.prediction_level < 0:
-			negativeLegroomTweets.append(tweet)
+		if tweet.category == 'hidden-fees':
+			hiddenFeesTweets.append(tweet)
 
-	return render(request, 'legroombad.html', {'legroomTweets':negativeLegroomTweets, 'title':'United Airlines'})
+	return render(request, 'hiddenFees.html', {"hiddenFeesTweets":hiddenFeesTweets, 'title':'United Airlines'})
 
-def unitedlegroomgood(request):
+def unitedBaggageFees(request):
 	tweets = UnitedAggregateModel.objects.all()
-	positiveLegroomTweets = []
+	baggageFeesTweets = []
 
 	for tweet in tweets:
-		if tweet.category == 'legroom' and tweet.prediction_level >= 0:
-			positiveLegroomTweets.append(tweet)
+		if tweet.category == 'baggage-fees':
+			baggageFeesTweets.append(tweet)
 
-	return render(request, 'legroomgood.html', {'legroomTweets':positiveLegroomTweets, 'title':'United Airlines'})
+	return render(request, 'baggageFees.html', {"baggageFeesTweets":baggageFeesTweets, 'title':'United Airlines'})
 
-def unitedtimelinessbad(request):
+def unitedTravelRewards(request):
 	tweets = UnitedAggregateModel.objects.all()
-	negativeTimeTweets = []
+	travelRewardsTweets = []
 
 	for tweet in tweets:
-		if tweet.category == 'timeliness' and tweet.prediction_level < 0:
-			negativeTimeTweets.append(tweet)
+		if tweet.category == 'travel-rewards':
+			travelRewardsTweets.append(tweet)
 
-	return render(request, 'timelinessbad.html', {"timeTweets":negativeTimeTweets, 'title':'United Airlines'})
+	return render(request, 'travelRewards.html', {"travelRewardsTweets":travelRewardsTweets, 'title':'United Airlines'})
 
-def unitedtimelinessgood(request):
+def unitedReimbursement(request):
 	tweets = UnitedAggregateModel.objects.all()
-	positiveTimeTweets = []
+	reimbursementTweets = []
 
 	for tweet in tweets:
-		if tweet.category == 'timeliness' and tweet.prediction_level >= 0:
-			positiveTimeTweets.append(tweet)
+		if tweet.category == 'reimbursement':
+			reimbursementTweets.append(tweet)
 
-	return render(request, 'timelinessgood.html', {"timeTweets":positiveTimeTweets, 'title':'United Airlines'})
+	return render(request, 'reimbursement.html', {"reimbursementTweets":reimbursementTweets, 'title':'United Airlines'})
+
+def unitedConnections(request):
+	tweets = UnitedAggregateModel.objects.all()
+	connectionsTweets = []
+
+	for tweet in tweets:
+		if tweet.category == 'connections':
+			connectionsTweets.append(tweet)
+
+	return render(request, 'connections.html', {"connectionsTweets":connectionsTweets, 'title':'United Airlines'})
+
+def unitedFoodEntertainment(request):
+	tweets = UnitedAggregateModel.objects.all()
+	foodEntertainmentTweets = []
+
+	for tweet in tweets:
+		if tweet.category == 'food-entertainment':
+			foodEntertainmentTweets.append(tweet)
+
+	return render(request, 'foodEntertainment.html', {"foodEntertainmentTweets":foodEntertainmentTweets, 'title':'United Airlines'})
+
+def unitedService(request):
+	tweets = UnitedAggregateModel.objects.all()
+	serviceTweets = []
+
+	for tweet in tweets:
+		if tweet.category == 'service':
+			serviceTweets.append(tweet)
+
+	return render(request, 'service.html', {"serviceTweets":serviceTweets, 'title':'United Airlines'})
+
+def unitedFamilyOptions(request):
+	tweets = UnitedAggregateModel.objects.all()
+	familyOptionsTweets = []
+
+	for tweet in tweets:
+		if tweet.category == 'family-options':
+			familyOptionsTweets.append(tweet)
+
+	return render(request, 'familyOptions.html', {"familyOptionsTweets":familyOptionsTweets, 'title':'United Airlines'})
 
 # ------------------------------------------ Spirit Airlines ------------------------------------------
-def spiritavailabilitybad(request):
+def spiritAvailability(request):
 	tweets = SpiritAggregateModel.objects.all()
-	negativeAvailableTweets = []
+	availableTweets = []
 
 	for tweet in tweets:
-		if tweet.category == 'availability' and tweet.prediction_level < 0:
-			negativeAvailableTweets.append(tweet)
+		if tweet.category == 'availability':
+			availableTweets.append(tweet)
 
-	return render(request, 'availabilitybad.html', {'availableTweets':negativeAvailableTweets, 'title':'Spirit Airlines'})
-	
-def spiritavailabilitygood(request):
+	return render(request, 'availability.html', {'availableTweets':availableTweets, 'title':'Spirit Airlines'})
+
+def spiritCost(request):
 	tweets = SpiritAggregateModel.objects.all()
-	positiveAvailableTweets = []
+	costTweets = []
 
 	for tweet in tweets:
-		if tweet.category == 'availability' and tweet.prediction_level >= 0:
-			positiveAvailableTweets.append(tweet)
+		if tweet.category == 'cost':
+			costTweets.append(tweet)
 
-	return render(request, 'availabilitygood.html', {'availableTweets':positiveAvailableTweets, 'title':'Spirit Airlines'})
+	return render(request, 'cost.html', {"costTweets":costTweets, 'title':'Spirit Airlines'})
 
-def spiritcostbad(request):
+def spiritLegroom(request):
 	tweets = SpiritAggregateModel.objects.all()
-	negativeCostTweets = []
+	legroomTweets = []
 
 	for tweet in tweets:
-		if tweet.category == 'cost' and tweet.prediction_level < 0:
-			negativeCostTweets.append(tweet)
+		if tweet.category == 'legroom':
+			legroomTweets.append(tweet)
 
-	return render(request, 'costbad.html', {"costTweets":negativeCostTweets, 'title':'Spirit Airlines'})
+	return render(request, 'legroom.html', {'legroomTweets':legroomTweets, 'title':'Spirit Airlines'})
 
-def spiritcostgood(request):
+def spiritTimeliness(request):
 	tweets = SpiritAggregateModel.objects.all()
-	positiveCostTweets = []
+	timeTweets = []
 
 	for tweet in tweets:
-		if tweet.category == 'cost' and tweet.prediction_level >= 0:
-			positiveCostTweets.append(tweet)
+		if tweet.category == 'timeliness':
+			timeTweets.append(tweet)
 
-	return render(request, 'costgood.html', {"costTweets":positiveCostTweets, 'title':'Spirit Airlines'})
+	return render(request, 'timeliness.html', {"timeTweets":timeTweets, 'title':'Spirit Airlines'})
 
-def spiritlegroombad(request):
+def spiritHiddenFees(request):
 	tweets = SpiritAggregateModel.objects.all()
-	negativeLegroomTweets = []
+	hiddenFeesTweets = []
 
 	for tweet in tweets:
-		if tweet.category == 'legroom' and tweet.prediction_level < 0:
-			negativeLegroomTweets.append(tweet)
+		if tweet.category == 'hidden-fees':
+			hiddenFeesTweets.append(tweet)
 
-	return render(request, 'legroombad.html', {'legroomTweets':negativeLegroomTweets, 'title':'Spirit Airlines'})
+	return render(request, 'hiddenFees.html', {"hiddenFeesTweets":hiddenFeesTweets, 'title':'Spirit Airlines'})
 
-def spiritlegroomgood(request):
+def spiritBaggageFees(request):
 	tweets = SpiritAggregateModel.objects.all()
-	positiveLegroomTweets = []
+	baggageFeesTweets = []
 
 	for tweet in tweets:
-		if tweet.category == 'legroom' and tweet.prediction_level >= 0:
-			positiveLegroomTweets.append(tweet)
+		if tweet.category == 'baggage-fees':
+			baggageFeesTweets.append(tweet)
 
-	return render(request, 'legroomgood.html', {'legroomTweets':positiveLegroomTweets, 'title':'Spirit Airlines'})
+	return render(request, 'baggageFees.html', {"baggageFeesTweets":baggageFeesTweets, 'title':'Spirit Airlines'})
 
-def spirittimelinessbad(request):
+def spiritTravelRewards(request):
 	tweets = SpiritAggregateModel.objects.all()
-	negativeTimeTweets = []
+	travelRewardsTweets = []
 
 	for tweet in tweets:
-		if tweet.category == 'timeliness' and tweet.prediction_level < 0:
-			negativeTimeTweets.append(tweet)
+		if tweet.category == 'travel-rewards':
+			travelRewardsTweets.append(tweet)
 
-	return render(request, 'timelinessbad.html', {"timeTweets":negativeTimeTweets, 'title':'Spirit Airlines'})
+	return render(request, 'travelRewards.html', {"travelRewardsTweets":travelRewardsTweets, 'title':'Spirit Airlines'})
 
-def spirittimelinessgood(request):
+def spiritReimbursement(request):
 	tweets = SpiritAggregateModel.objects.all()
-	positiveTimeTweets = []
+	reimbursementTweets = []
 
 	for tweet in tweets:
-		if tweet.category == 'timeliness' and tweet.prediction_level >= 0:
-			positiveTimeTweets.append(tweet)
+		if tweet.category == 'reimbursement':
+			reimbursementTweets.append(tweet)
 
-	return render(request, 'timelinessgood.html', {"timeTweets":positiveTimeTweets, 'title':'Spirit Airlines'})
+	return render(request, 'reimbursement.html', {"reimbursementTweets":reimbursementTweets, 'title':'Spirit Airlines'})
+
+def spiritConnections(request):
+	tweets = SpiritAggregateModel.objects.all()
+	connectionsTweets = []
+
+	for tweet in tweets:
+		if tweet.category == 'connections':
+			connectionsTweets.append(tweet)
+
+	return render(request, 'connections.html', {"connectionsTweets":connectionsTweets, 'title':'Spirit Airlines'})
+
+def spiritFoodEntertainment(request):
+	tweets = SpiritAggregateModel.objects.all()
+	foodEntertainmentTweets = []
+
+	for tweet in tweets:
+		if tweet.category == 'food-entertainment':
+			foodEntertainmentTweets.append(tweet)
+
+	return render(request, 'foodEntertainment.html', {"foodEntertainmentTweets":foodEntertainmentTweets, 'title':'Spirit Airlines'})
+
+def spiritService(request):
+	tweets = SpiritAggregateModel.objects.all()
+	serviceTweets = []
+
+	for tweet in tweets:
+		if tweet.category == 'service':
+			serviceTweets.append(tweet)
+
+	return render(request, 'service.html', {"serviceTweets":serviceTweets, 'title':'Spirit Airlines'})
+
+def spiritFamilyOptions(request):
+	tweets = SpiritAggregateModel.objects.all()
+	familyOptionsTweets = []
+
+	for tweet in tweets:
+		if tweet.category == 'family-options':
+			familyOptionsTweets.append(tweet)
+
+	return render(request, 'familyOptions.html', {"familyOptionsTweets":familyOptionsTweets, 'title':'Spirit Airlines'})
