@@ -204,7 +204,7 @@ def cost(request):
 		if tweet.category == 'cost':
 			costTweets.append(tweet)
 
-	return render(request, 'cost.html', {"costTweets":costTweets, 'title':'JetBlue'})
+	return render(request, 'data.html', {"tweets":costTweets, 'title':'JetBlue', 'category': 'Cost'})
 
 def legroom(request):
 	tweets = JetblueAggregateModel.objects.all()
@@ -214,7 +214,7 @@ def legroom(request):
 		if tweet.category == 'legroom':
 			legroomTweets.append(tweet)
 
-	return render(request, 'legroom.html', {'legroomTweets':legroomTweets, 'title':'JetBlue'})
+	return render(request, 'data.html', {'tweets':legroomTweets, 'title':'JetBlue', 'category': 'Legroom'})
 
 def timeliness(request):
 	tweets = JetblueAggregateModel.objects.all()
@@ -224,7 +224,7 @@ def timeliness(request):
 		if tweet.category == 'timeliness':
 			timeTweets.append(tweet)
 
-	return render(request, 'timeliness.html', {"timeTweets":timeTweets, 'title':'JetBlue'})
+	return render(request, 'data.html', {"tweets":timeTweets, 'title':'JetBlue', 'category': 'Timeliness'})
 
 def hiddenFees(request):
 	tweets = JetblueAggregateModel.objects.all()
@@ -234,7 +234,7 @@ def hiddenFees(request):
 		if tweet.category == 'hidden-fees':
 			hiddenFeesTweets.append(tweet)
 
-	return render(request, 'hiddenFees.html', {"hiddenFeesTweets":hiddenFeesTweets, 'title':'JetBlue'})
+	return render(request, 'data.html', {"tweets":hiddenFeesTweets, 'title':'JetBlue', 'category': 'Hidden Fees'})
 
 def baggageFees(request):
 	tweets = JetblueAggregateModel.objects.all()
@@ -244,7 +244,7 @@ def baggageFees(request):
 		if tweet.category == 'baggage-fees':
 			baggageFeesTweets.append(tweet)
 
-	return render(request, 'baggageFees.html', {"baggageFeesTweets":baggageFeesTweets, 'title':'JetBlue'})
+	return render(request, 'data.html', {"tweets":baggageFeesTweets, 'title':'JetBlue', 'category': 'Baggage Fees'})
 
 def travelRewards(request):
 	tweets = JetblueAggregateModel.objects.all()
@@ -254,7 +254,7 @@ def travelRewards(request):
 		if tweet.category == 'travel-rewards':
 			travelRewardsTweets.append(tweet)
 
-	return render(request, 'travelRewards.html', {"travelRewardsTweets":travelRewardsTweets, 'title':'JetBlue'})
+	return render(request, 'data.html', {"tweets":travelRewardsTweets, 'title':'JetBlue', 'category': 'Travel'})
 
 def reimbursement(request):
 	tweets = JetblueAggregateModel.objects.all()
@@ -264,7 +264,7 @@ def reimbursement(request):
 		if tweet.category == 'reimbursement':
 			reimbursementTweets.append(tweet)
 
-	return render(request, 'reimbursement.html', {"reimbursementTweets":reimbursementTweets, 'title':'JetBlue'})
+	return render(request, 'data.html', {"tweets":reimbursementTweets, 'title':'JetBlue', 'category': 'Reimbursement'})
 
 def connections(request):
 	tweets = JetblueAggregateModel.objects.all()
@@ -274,7 +274,7 @@ def connections(request):
 		if tweet.category == 'connections':
 			connectionsTweets.append(tweet)
 
-	return render(request, 'connections.html', {"connectionsTweets":connectionsTweets, 'title':'JetBlue'})
+	return render(request, 'data.html', {"tweets":connectionsTweets, 'title':'JetBlue', 'category': 'Connections'})
 
 def foodEntertainment(request):
 	tweets = JetblueAggregateModel.objects.all()
@@ -284,7 +284,7 @@ def foodEntertainment(request):
 		if tweet.category == 'food-entertainment':
 			foodEntertainmentTweets.append(tweet)
 
-	return render(request, 'foodEntertainment.html', {"foodEntertainmentTweets":foodEntertainmentTweets, 'title':'JetBlue'})
+	return render(request, 'data.html', {"tweets":foodEntertainmentTweets, 'title':'JetBlue', 'category': 'Food Entertainment'})
 
 def service(request):
 	tweets = JetblueAggregateModel.objects.all()
@@ -294,7 +294,7 @@ def service(request):
 		if tweet.category == 'service':
 			serviceTweets.append(tweet)
 
-	return render(request, 'service.html', {"serviceTweets":serviceTweets, 'title':'JetBlue'})
+	return render(request, 'data.html', {"tweets":serviceTweets, 'title':'JetBlue', 'category': 'Service'})
 
 def familyOptions(request):
 	tweets = JetblueAggregateModel.objects.all()
@@ -304,7 +304,7 @@ def familyOptions(request):
 		if tweet.category == 'family-options':
 			familyOptionsTweets.append(tweet)
 
-	return render(request, 'familyOptions.html', {"familyOptionsTweets":familyOptionsTweets, 'title':'JetBlue'})
+	return render(request, 'data.html', {"tweets":familyOptionsTweets, 'title':'JetBlue', 'category': 'Family Options'})
 
 
 # ------------------------------------------ American Airlines ------------------------------------------
@@ -316,7 +316,7 @@ def americanAvailability(request):
 		if tweet.category == 'availability':
 			availableTweets.append(tweet)
 
-	return render(request, 'availability.html', {'availableTweets':availableTweets, 'title':'American Airlines'})
+	return render(request, 'data.html', {'tweets':availableTweets, 'title':'American Airlines', 'category': 'Availability'})
 
 def americanCost(request):
 	tweets = AmericanAggregateModel.objects.all()
@@ -326,7 +326,7 @@ def americanCost(request):
 		if tweet.category == 'cost':
 			costTweets.append(tweet)
 
-	return render(request, 'cost.html', {"costTweets":costTweets, 'title':'American Airlines'})
+	return render(request, 'data.html', {"tweets":costTweets, 'title':'American Airlines', 'category': 'Cost'})
 
 def americanLegroom(request):
 	tweets = AmericanAggregateModel.objects.all()
@@ -336,7 +336,7 @@ def americanLegroom(request):
 		if tweet.category == 'legroom':
 			legroomTweets.append(tweet)
 
-	return render(request, 'legroom.html', {'legroomTweets':legroomTweets, 'title':'American Airlines'})
+	return render(request, 'data.html', {'tweets':legroomTweets, 'title':'American Airlines', 'category': 'Legroom'})
 
 def americanTimeliness(request):
 	tweets = AmericanAggregateModel.objects.all()
@@ -346,7 +346,7 @@ def americanTimeliness(request):
 		if tweet.category == 'timeliness':
 			timeTweets.append(tweet)
 
-	return render(request, 'timeliness.html', {"timeTweets":timeTweets, 'title':'American Airlines'})
+	return render(request, 'data.html', {"tweets":timeTweets, 'title':'American Airlines', 'category': 'Timeliness'})
 
 def americanHiddenFees(request):
 	tweets = AmericanAggregateModel.objects.all()
@@ -356,7 +356,7 @@ def americanHiddenFees(request):
 		if tweet.category == 'hidden-fees':
 			hiddenFeesTweets.append(tweet)
 
-	return render(request, 'hiddenFees.html', {"hiddenFeesTweets":hiddenFeesTweets, 'title':'American Airlines'})
+	return render(request, 'data.html', {"tweets":hiddenFeesTweets, 'title':'American Airlines', 'category': 'Hidden Fees'})
 
 def americanBaggageFees(request):
 	tweets = AmericanAggregateModel.objects.all()
@@ -366,7 +366,7 @@ def americanBaggageFees(request):
 		if tweet.category == 'baggage-fees':
 			baggageFeesTweets.append(tweet)
 
-	return render(request, 'baggageFees.html', {"baggageFeesTweets":baggageFeesTweets, 'title':'American Airlines'})
+	return render(request, 'data.html', {"tweets":baggageFeesTweets, 'title':'American Airlines', 'category': 'Baggage Fees'})
 
 def americanTravelRewards(request):
 	tweets = AmericanAggregateModel.objects.all()
@@ -376,7 +376,7 @@ def americanTravelRewards(request):
 		if tweet.category == 'travel-rewards':
 			travelRewardsTweets.append(tweet)
 
-	return render(request, 'travelRewards.html', {"travelRewardsTweets":travelRewardsTweets, 'title':'American Airlines'})
+	return render(request, 'data.html', {"tweets":travelRewardsTweets, 'title':'American Airlines', 'category': 'Travel Rewards'})
 
 def americanReimbursement(request):
 	tweets = AmericanAggregateModel.objects.all()
@@ -386,7 +386,7 @@ def americanReimbursement(request):
 		if tweet.category == 'reimbursement':
 			reimbursementTweets.append(tweet)
 
-	return render(request, 'reimbursement.html', {"reimbursementTweets":reimbursementTweets, 'title':'American Airlines'})
+	return render(request, 'data.html', {"tweets":reimbursementTweets, 'title':'American Airlines', 'category': 'Reimbursement'})
 
 def americanConnections(request):
 	tweets = AmericanAggregateModel.objects.all()
@@ -396,7 +396,7 @@ def americanConnections(request):
 		if tweet.category == 'connections':
 			connectionsTweets.append(tweet)
 
-	return render(request, 'connections.html', {"connectionsTweets":connectionsTweets, 'title':'American Airlines'})
+	return render(request, 'data.html', {"tweets":connectionsTweets, 'title':'American Airlines', 'category': 'Connections'})
 
 def americanFoodEntertainment(request):
 	tweets = AmericanAggregateModel.objects.all()
@@ -406,7 +406,7 @@ def americanFoodEntertainment(request):
 		if tweet.category == 'food-entertainment':
 			foodEntertainmentTweets.append(tweet)
 
-	return render(request, 'foodEntertainment.html', {"foodEntertainmentTweets":foodEntertainmentTweets, 'title':'American Airlines'})
+	return render(request, 'data.html', {"tweets":foodEntertainmentTweets, 'title':'American Airlines', 'category': 'Food Entertainment'})
 
 def americanService(request):
 	tweets = AmericanAggregateModel.objects.all()
@@ -416,7 +416,7 @@ def americanService(request):
 		if tweet.category == 'service':
 			serviceTweets.append(tweet)
 
-	return render(request, 'service.html', {"serviceTweets":serviceTweets, 'title':'American Airlines'})
+	return render(request, 'data.html', {"tweets":serviceTweets, 'title':'American Airlines', 'category': 'Service'})
 
 def americanFamilyOptions(request):
 	tweets = AmericanAggregateModel.objects.all()
@@ -426,7 +426,7 @@ def americanFamilyOptions(request):
 		if tweet.category == 'family-options':
 			familyOptionsTweets.append(tweet)
 
-	return render(request, 'familyOptions.html', {"familyOptionsTweets":familyOptionsTweets, 'title':'American Airlines'})
+	return render(request, 'data.html', {"tweets":familyOptionsTweets, 'title':'American Airlines', 'category': 'Family Options'})
 
 # ------------------------------------------ United Airlines ------------------------------------------
 def unitedAvailability(request):
@@ -437,7 +437,7 @@ def unitedAvailability(request):
 		if tweet.category == 'availability':
 			availableTweets.append(tweet)
 
-	return render(request, 'availability.html', {'availableTweets':availableTweets, 'title':'United Airlines'})
+	return render(request, 'data.html', {'tweets':availableTweets, 'title':'United Airlines', 'category': 'Availability'})
 
 def unitedCost(request):
 	tweets = UnitedAggregateModel.objects.all()
@@ -447,7 +447,7 @@ def unitedCost(request):
 		if tweet.category == 'cost':
 			costTweets.append(tweet)
 
-	return render(request, 'cost.html', {"costTweets":costTweets, 'title':'United Airlines'})
+	return render(request, 'data.html', {"tweets":costTweets, 'title':'United Airlines', 'category': 'Cost'})
 
 def unitedLegroom(request):
 	tweets = UnitedAggregateModel.objects.all()
@@ -457,7 +457,7 @@ def unitedLegroom(request):
 		if tweet.category == 'legroom':
 			legroomTweets.append(tweet)
 
-	return render(request, 'legroom.html', {'legroomTweets':legroomTweets, 'title':'United Airlines'})
+	return render(request, 'data.html', {'tweets':legroomTweets, 'title':'United Airlines', 'category': 'Legroom'})
 
 def unitedTimeliness(request):
 	tweets = UnitedAggregateModel.objects.all()
@@ -467,7 +467,7 @@ def unitedTimeliness(request):
 		if tweet.category == 'timeliness':
 			timeTweets.append(tweet)
 
-	return render(request, 'timeliness.html', {"timeTweets":timeTweets, 'title':'United Airlines'})
+	return render(request, 'data.html', {"tweets":timeTweets, 'title':'United Airlines', 'category': 'Timeliness'})
 
 def unitedHiddenFees(request):
 	tweets = UnitedAggregateModel.objects.all()
@@ -477,7 +477,7 @@ def unitedHiddenFees(request):
 		if tweet.category == 'hidden-fees':
 			hiddenFeesTweets.append(tweet)
 
-	return render(request, 'hiddenFees.html', {"hiddenFeesTweets":hiddenFeesTweets, 'title':'United Airlines'})
+	return render(request, 'data.html', {"tweets":hiddenFeesTweets, 'title':'United Airlines', 'category': 'Hidden Ffees'})
 
 def unitedBaggageFees(request):
 	tweets = UnitedAggregateModel.objects.all()
@@ -487,7 +487,7 @@ def unitedBaggageFees(request):
 		if tweet.category == 'baggage-fees':
 			baggageFeesTweets.append(tweet)
 
-	return render(request, 'baggageFees.html', {"baggageFeesTweets":baggageFeesTweets, 'title':'United Airlines'})
+	return render(request, 'data.html', {"tweets":baggageFeesTweets, 'title':'United Airlines', 'category': 'Baggage Fees'})
 
 def unitedTravelRewards(request):
 	tweets = UnitedAggregateModel.objects.all()
@@ -497,7 +497,7 @@ def unitedTravelRewards(request):
 		if tweet.category == 'travel-rewards':
 			travelRewardsTweets.append(tweet)
 
-	return render(request, 'travelRewards.html', {"travelRewardsTweets":travelRewardsTweets, 'title':'United Airlines'})
+	return render(request, 'data.html', {"tweets":travelRewardsTweets, 'title':'United Airlines', 'category': 'Travel Rewards'})
 
 def unitedReimbursement(request):
 	tweets = UnitedAggregateModel.objects.all()
@@ -507,7 +507,7 @@ def unitedReimbursement(request):
 		if tweet.category == 'reimbursement':
 			reimbursementTweets.append(tweet)
 
-	return render(request, 'reimbursement.html', {"reimbursementTweets":reimbursementTweets, 'title':'United Airlines'})
+	return render(request, 'data.html', {"tweets":reimbursementTweets, 'title':'United Airlines', 'category': 'Reimbursement'})
 
 def unitedConnections(request):
 	tweets = UnitedAggregateModel.objects.all()
@@ -517,7 +517,7 @@ def unitedConnections(request):
 		if tweet.category == 'connections':
 			connectionsTweets.append(tweet)
 
-	return render(request, 'connections.html', {"connectionsTweets":connectionsTweets, 'title':'United Airlines'})
+	return render(request, 'data.html', {"tweets":connectionsTweets, 'title':'United Airlines', 'category': 'Connections'})
 
 def unitedFoodEntertainment(request):
 	tweets = UnitedAggregateModel.objects.all()
@@ -527,7 +527,7 @@ def unitedFoodEntertainment(request):
 		if tweet.category == 'food-entertainment':
 			foodEntertainmentTweets.append(tweet)
 
-	return render(request, 'foodEntertainment.html', {"foodEntertainmentTweets":foodEntertainmentTweets, 'title':'United Airlines'})
+	return render(request, 'data.html', {"tweets":foodEntertainmentTweets, 'title':'United Airlines', 'category': 'Food Entertainment'})
 
 def unitedService(request):
 	tweets = UnitedAggregateModel.objects.all()
@@ -537,7 +537,7 @@ def unitedService(request):
 		if tweet.category == 'service':
 			serviceTweets.append(tweet)
 
-	return render(request, 'service.html', {"serviceTweets":serviceTweets, 'title':'United Airlines'})
+	return render(request, 'data.html', {"tweets":serviceTweets, 'title':'United Airlines', 'category': 'Service'})
 
 def unitedFamilyOptions(request):
 	tweets = UnitedAggregateModel.objects.all()
@@ -547,7 +547,7 @@ def unitedFamilyOptions(request):
 		if tweet.category == 'family-options':
 			familyOptionsTweets.append(tweet)
 
-	return render(request, 'familyOptions.html', {"familyOptionsTweets":familyOptionsTweets, 'title':'United Airlines'})
+	return render(request, 'data.html', {"tweets":familyOptionsTweets, 'title':'United Airlines', 'category': 'Family Options'})
 
 # ------------------------------------------ Spirit Airlines ------------------------------------------
 def spiritAvailability(request):
@@ -558,7 +558,7 @@ def spiritAvailability(request):
 		if tweet.category == 'availability':
 			availableTweets.append(tweet)
 
-	return render(request, 'availability.html', {'availableTweets':availableTweets, 'title':'Spirit Airlines'})
+	return render(request, 'data.html', {'tweets':availableTweets, 'title':'Spirit Airlines', 'category': 'Availability'})
 
 def spiritCost(request):
 	tweets = SpiritAggregateModel.objects.all()
@@ -568,7 +568,7 @@ def spiritCost(request):
 		if tweet.category == 'cost':
 			costTweets.append(tweet)
 
-	return render(request, 'cost.html', {"costTweets":costTweets, 'title':'Spirit Airlines'})
+	return render(request, 'data.html', {"tweets":costTweets, 'title':'Spirit Airlines', 'category': 'Cost'})
 
 def spiritLegroom(request):
 	tweets = SpiritAggregateModel.objects.all()
@@ -578,7 +578,7 @@ def spiritLegroom(request):
 		if tweet.category == 'legroom':
 			legroomTweets.append(tweet)
 
-	return render(request, 'legroom.html', {'legroomTweets':legroomTweets, 'title':'Spirit Airlines'})
+	return render(request, 'data.html', {'tweets':legroomTweets, 'title':'Spirit Airlines', 'category': 'Legroom'})
 
 def spiritTimeliness(request):
 	tweets = SpiritAggregateModel.objects.all()
@@ -588,7 +588,7 @@ def spiritTimeliness(request):
 		if tweet.category == 'timeliness':
 			timeTweets.append(tweet)
 
-	return render(request, 'timeliness.html', {"timeTweets":timeTweets, 'title':'Spirit Airlines'})
+	return render(request, 'data.html', {"tweets":timeTweets, 'title':'Spirit Airlines', 'category': 'Timeliness'})
 
 def spiritHiddenFees(request):
 	tweets = SpiritAggregateModel.objects.all()
@@ -598,7 +598,7 @@ def spiritHiddenFees(request):
 		if tweet.category == 'hidden-fees':
 			hiddenFeesTweets.append(tweet)
 
-	return render(request, 'hiddenFees.html', {"hiddenFeesTweets":hiddenFeesTweets, 'title':'Spirit Airlines'})
+	return render(request, 'data.html', {"tweets":hiddenFeesTweets, 'title':'Spirit Airlines', 'category': 'Hidden Fees'})
 
 def spiritBaggageFees(request):
 	tweets = SpiritAggregateModel.objects.all()
@@ -608,7 +608,7 @@ def spiritBaggageFees(request):
 		if tweet.category == 'baggage-fees':
 			baggageFeesTweets.append(tweet)
 
-	return render(request, 'baggageFees.html', {"baggageFeesTweets":baggageFeesTweets, 'title':'Spirit Airlines'})
+	return render(request, 'data.html', {"tweets":baggageFeesTweets, 'title':'Spirit Airlines', 'category': 'Baggage Fees'})
 
 def spiritTravelRewards(request):
 	tweets = SpiritAggregateModel.objects.all()
@@ -618,7 +618,7 @@ def spiritTravelRewards(request):
 		if tweet.category == 'travel-rewards':
 			travelRewardsTweets.append(tweet)
 
-	return render(request, 'travelRewards.html', {"travelRewardsTweets":travelRewardsTweets, 'title':'Spirit Airlines'})
+	return render(request, 'data.html', {"tweets":travelRewardsTweets, 'title':'Spirit Airlines', 'category': 'Travel Rewards'})
 
 def spiritReimbursement(request):
 	tweets = SpiritAggregateModel.objects.all()
@@ -628,7 +628,7 @@ def spiritReimbursement(request):
 		if tweet.category == 'reimbursement':
 			reimbursementTweets.append(tweet)
 
-	return render(request, 'reimbursement.html', {"reimbursementTweets":reimbursementTweets, 'title':'Spirit Airlines'})
+	return render(request, 'data.html', {"tweets":reimbursementTweets, 'title':'Spirit Airlines', 'category': 'Reimbursement'})
 
 def spiritConnections(request):
 	tweets = SpiritAggregateModel.objects.all()
@@ -638,7 +638,7 @@ def spiritConnections(request):
 		if tweet.category == 'connections':
 			connectionsTweets.append(tweet)
 
-	return render(request, 'connections.html', {"connectionsTweets":connectionsTweets, 'title':'Spirit Airlines'})
+	return render(request, 'data.html', {"tweets":connectionsTweets, 'title':'Spirit Airlines', 'category': 'Connections'})
 
 def spiritFoodEntertainment(request):
 	tweets = SpiritAggregateModel.objects.all()
@@ -648,7 +648,7 @@ def spiritFoodEntertainment(request):
 		if tweet.category == 'food-entertainment':
 			foodEntertainmentTweets.append(tweet)
 
-	return render(request, 'foodEntertainment.html', {"foodEntertainmentTweets":foodEntertainmentTweets, 'title':'Spirit Airlines'})
+	return render(request, 'data.html', {"tweets":foodEntertainmentTweets, 'title':'Spirit Airlines', 'category': 'Food Entertainment'})
 
 def spiritService(request):
 	tweets = SpiritAggregateModel.objects.all()
@@ -658,7 +658,7 @@ def spiritService(request):
 		if tweet.category == 'service':
 			serviceTweets.append(tweet)
 
-	return render(request, 'service.html', {"serviceTweets":serviceTweets, 'title':'Spirit Airlines'})
+	return render(request, 'data.html', {"tweets":serviceTweets, 'title':'Spirit Airlines', 'category': 'Service'})
 
 def spiritFamilyOptions(request):
 	tweets = SpiritAggregateModel.objects.all()
@@ -668,4 +668,4 @@ def spiritFamilyOptions(request):
 		if tweet.category == 'family-options':
 			familyOptionsTweets.append(tweet)
 
-	return render(request, 'familyOptions.html', {"familyOptionsTweets":familyOptionsTweets, 'title':'Spirit Airlines'})
+	return render(request, 'data.html', {"tweets":familyOptionsTweets, 'title':'Spirit Airlines', 'category': 'Family Options'})
