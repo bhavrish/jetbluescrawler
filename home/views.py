@@ -194,7 +194,7 @@ def availability(request):
 		if tweet.category == 'availability':
 			availableTweets.append(tweet)
 
-	return render(request, 'availability.html', {'availableTweets':availableTweets, 'title':'JetBlue'})
+	return render(request, 'data.html', {'tweets':availableTweets, 'title':'JetBlue', 'category': 'Availability'})
 
 def cost(request):
 	tweets = JetblueAggregateModel.objects.all()
