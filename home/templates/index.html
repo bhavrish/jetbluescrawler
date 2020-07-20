@@ -24,6 +24,17 @@
             .is-hovered:hover {
                 color: #d70206;
             }
+
+            .dot {
+                height: 25px;
+                width: 25px;
+                border-radius: 50%;
+                display: inline-block;
+            }
+
+            html {
+                scroll-behavior: smooth;
+            }
         </style>
     </head>
     <body>
@@ -36,16 +47,16 @@
                                     <rect width="5" height="83" fill="white"/>
                             </svg>   
                             <div class="column">
-                                <a href="#" class="is-flex has-text-white-ter">
+                                <a href="#scorecards" class="is-flex has-text-white-ter">
                                     Sentiment Scores
                                 </a>
-                                <a href="#" class="is-flex has-text-white-ter">
+                                <a href="#methodology" class="is-flex has-text-white-ter">
                                     Methodology
                                 </a>
-                                <a href="#" class="is-flex has-text-white-ter">
-                                    Comparison
+                                <a href="#datasets" class="is-flex has-text-white-ter">
+                                    Datasets
                                 </a>
-                                <a href="#" class="is-flex has-text-white-ter">
+                                <a href="#credits" class="is-flex has-text-white-ter">
                                     About
                                 </a>
                             </div>
@@ -147,7 +158,59 @@
             </section>
     
             <section id="charts" class="section">
-                <h3 class="has-text-centered has-text-white-ter is-size-2 column">Overall Scores</h3>
+                <h3 class="has-text-centered has-text-white-ter is-size-2">Overall Scores</h3>
+                <fieldset>
+                    <nav class="level is-mobile" style="height: 25px;">
+                        <div class="has-text-white-ter level-item level">
+                            <div class="px-2 level-left">
+                                <div class="level-item">
+                                    <label for="dot">jetBlue</label>
+                                </div>
+                            </div>
+                            <div class="level-right">
+                                <div class="level-item">
+                                    <span style="background-color:#d70206" class="dot"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="has-text-white-ter level-item level">
+                            <div class="px-2 level-left">
+                                <div class="level-item">
+                                    <label for="dot">American</label>
+                                </div>
+                            </div>
+                            <div class="level-right">
+                                <div class="level-item">
+                                    <span style="background-color:#f05b4f" class="dot"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="has-text-white-ter level-item level">
+                            <div class="px-2 level-left">
+                                <div class="level-item">
+                                    <label for="dot">United</label>
+                                </div>
+                            </div>
+                            <div class="level-right">
+                                <div class="level-item">
+                                    <span style="background-color:#f4c63d" class="dot"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="has-text-white-ter level-item level">
+                            <div class="px-2 level-left">
+                                <div class="level-item">
+                                    <label for="dot">Spirit</label>
+                                </div>
+                            </div>
+                            <div class="level-right">
+                                <div class="level-item">
+                                    <span style="background-color:#d17905" class="dot"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </fieldset>
                 <div class="ct-chart ct-golden-section" id="chart0"></div>
                 <div class="level level-title">
                     <h3 class="has-text-centered has-text-white-ter is-size-4 column">Cost</h3>
@@ -202,14 +265,136 @@
                 </div>
             </section>
     
-            <section id="comparison" class="section">
-    
+            <section id="datasets" class="section">
+                <h2 class="is-size-2 py-5 has-text-white-ter">Datasets</h2>
+                <table class="table is-striped is-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>JETBLUE</th>
+                            <th>AMERICAN</th>
+                            <th>UNITED</th>
+                            <th>SPIRIT</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Cost</td>
+                            <td class=""><a href="cost">jetblue_cost.dat</a></td>
+                            <td class=""><a href="americanCost">american_cost.dat</a></td>
+                            <td class=""><a href="unitedCost">united_cost.dat</a></td>
+                            <td class=""><a href="spiritCost">spirit_cost.dat</a></td>
+                        </tr>
+                        <tr>
+                            <td>Hidden Fees</td>
+                            <td class=""><a href="hiddenFees">jetblue_hidden_fees.dat</a></td>
+                            <td class=""><a href="americanHiddenFees">american_hidden_fees.dat</a></td>
+                            <td class=""><a href="unitedHiddenFees">united_hidden_fees.dat</a></td>
+                            <td class=""><a href="spiritHiddenFees">spirit_hidden_fees.dat</a></td>
+                        </tr>
+                        <tr>
+                            <td>Baggage Fees</td>
+                            <td class=""><a href="baggageFees">jetblue_baggage_fees.dat</a></td>
+                            <td class=""><a href="americanBaggageFees">american_baggage_fees.dat</a></td>
+                            <td class=""><a href="unitedBaggageFees">united_baggage_fees.dat</a></td>
+                            <td class=""><a href="spiritBaggageFees">spirit_baggage_fees.dat</a></td>
+                        </tr>
+                        <tr>
+                            <td>Travel Rewards</td>
+                            <td class=""><a href="travelRewards">jetblue_travel_rewards.dat</a></td>
+                            <td class=""><a href="americanTravelRewards">american_travel_rewards.dat</a></td>
+                            <td class=""><a href="unitedTravelRewards">united_travel_rewards.dat</a></td>
+                            <td class=""><a href="spiritTravelRewards">spirit_travel_rewards.dat</a></td>
+                        </tr>
+                        <tr>
+                            <td>Reimbursement</td>
+                            <td class=""><a href="reimbursement">jetblue_reimbursement.dat</a></td>
+                            <td class=""><a href="americanReimbursement">american_reimbursement.dat</a></td>
+                            <td class=""><a href="unitedReimbursement">united_reimbursement.dat</a></td>
+                            <td class=""><a href="spiritReimbursement">spirit_reimbursement.dat</a></td>
+                        </tr>
+                        <tr>
+                            <td>Timeliness</td>
+                            <td class=""><a href="timeliness">jetblue_timeliness.dat</a></td>
+                            <td class=""><a href="americanTimeliness">american_timeliness.dat</a></td>
+                            <td class=""><a href="unitedTimeliness">united_timeliness.dat</a></td>
+                            <td class=""><a href="spiritTimeliness">spirit_timeliness.dat</a></td>
+                        </tr>
+                        <tr>
+                            <td>Availability</td>
+                            <td class=""><a href="availability">jetblue_availability.dat</a></td>
+                            <td class=""><a href="americanAvailability">american_availability.dat</a></td>
+                            <td class=""><a href="unitedAvailability">united_availability.dat</a></td>
+                            <td class=""><a href="spiritAvailability">spirit_availability.dat</a></td>
+                        </tr>
+                        <tr>
+                            <td>Integration w/ Other Airlines</td>
+                            <td class=""><a href="connections">jetblue_integrations.dat</a></td>
+                            <td class=""><a href="americanConnections">american_integrations.dat</a></td>
+                            <td class=""><a href="unitedConnection">united_integrations.dat</a></td>
+                            <td class=""><a href="spiritConnection">spirit_integrations.dat</a></td>
+                        </tr>
+                        <tr>
+                            <td>Leg Room</td>
+                            <td class=""><a href="legroom">jetblue_legroom.dat</a></td>
+                            <td class=""><a href="americanLegroom">american_legroom.dat</a></td>
+                            <td class=""><a href="unitedLegroom">united_legroom.dat</a></td>
+                            <td class=""><a href="spiritLegroom">spirit_legroom.dat</a></td>
+                        </tr>
+                        <tr>
+                            <td>Food and Entertainment</td>
+                            <td class=""><a href="foodEntertainment">jetblue_food_entertainment.dat</a></td>
+                            <td class=""><a href="americanFoodEntertainment">american_food_entertainment.dat</a></td>
+                            <td class=""><a href="unitedFoodEntertainment">united_food_entertainment.dat</a></td>
+                            <td class=""><a href="spiritFoodEntertainment">spirit_food_entertainment.dat</a></td>
+                        </tr>
+                        <tr>
+                            <td>Service</td>
+                            <td class=""><a href="service">jetblue_service.dat</a></td>
+                            <td class=""><a href="americanService">american_service.dat</a></td>
+                            <td class=""><a href="unitedService">united_service.dat</a></td>
+                            <td class=""><a href="spiritService">spirit_service.dat</a></td>
+                        </tr>
+                        <tr>
+                            <td>Family Options</td>
+                            <td class=""><a href="familyOptions">jetblue_family_options.dat</a></td>
+                            <td class=""><a href="americanFamilyOptions">american_family_options.dat</a></td>
+                            <td class=""><a href="unitedFamilyOptions">united_family_options.dat</a></td>
+                            <td class=""><a href="spiritFamilyOptions">spirit_family_options.dat</a></td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
             </section>
     
-            <section id="credits" class="section">
-    
+            <section id="credits" class="section has-text-white-ter">
+                <h2 class="is-size-2">Credits</h2>
+                <div class="is-size-5">
+                    <p class="">
+                        This project is brought to you by Bhavesh Shah and Jonathan Wong. It was originally conceived and built with Jessica Ding and Michael Liu at YHacks in 2019. Ideation slides are available <a href="https://docs.google.com/presentation/d/1N0h9pwNU0eqOqePhaHeSEICEfx-Aw9I2nusYy7TcIRc/edit" class="is-hovered">here</a>. The <a href="https://commons.wikimedia.org/wiki/File:Spirit_Airlines_Airbus_A321-231_N677NK_approaching_Newark_Airport.jpg">Spirit photo</a> is from Adam Moreira under the <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en" class="is-hovered">Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)</a>.
+                    </p>
+                    <p class="pt-5">
+                        Bhavesh Shah<br>
+                        <a href="https://www.linkedin.com/in/bshah05/">Linkedin</a>
+                        <a href="http://bhavrish.github.io/">Website</a>
+                    </p>
+                    <p class="pt-2">
+                        Jonathan Wong<br>
+                        <a href="https://unintendedcon.github.io">Website</a>
+                        <a href="https://twitter/suchcaptcha">Twitter</a>
+                    </p>
+                    <p class="pt-2">
+                        Jessica Ding<br>
+                        <a href="https://www.linkedin.com/in/jessding1729/">Linkedin</a>
+                    </p>
+                    <p class="pt-2">
+                        Michael Liu<br>
+                        <a href="https://www.linkedin.com/in/michaeltliu/">Linkedin</a>
+                    </p>
+                </div>
             </section>
         </div>
+        
         <script>
             /* overall scores*/
             new Chartist.Line('#chart0', {
@@ -235,9 +420,6 @@
                 chartPadding: {
                     right: 40
                 },
-                plugins: [
-                    Chartist.plugins.legend(),
-                ],
                 axisX: {
                     divisor: 5,
                     labelInterpolationFnc: function(value) {
