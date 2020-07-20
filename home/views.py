@@ -13,6 +13,9 @@ def home(request):
 	{'modelObjects': SpiritCondensedModel.objects.all(), 'name': "SPIRIT", 'imageURL': 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Spirit_Airlines_Airbus_A321-231_N677NK_approaching_Newark_Airport.jpg/1280px-Spirit_Airlines_Airbus_A321-231_N677NK_approaching_Newark_Airport.jpg'}
 	]
 
+	allDates = set()
+	ranOnce = False
+
 	for airline in airlineInfoList:
 		modelObjects = airline['modelObjects']
 
@@ -150,6 +153,12 @@ def home(request):
 
 		OverallScore = (AvailabilityScore + CostScore + LegroomScore + TimeScore + BaggageFeesScore + HiddenFeesScore + ConnectionsScore + FamilyOptionsScore + FoodEntertainmentScore + ReimbursementScore + ServiceScore + TravelRewardsScore)/12
 		
+		if ranOnce == False:
+			for date in OverallDict.keys():
+				if not date in allDates:
+					allDates.add(date)
+			ranOnce = True
+
 		airline['OverallScore'] = OverallScore
 		airline['AvailabilityScore'] = AvailabilityScore
 		airline['CostScore'] = CostScore
@@ -179,7 +188,7 @@ def home(request):
 		airline['TravelRewardsDict'] = TravelRewardsDict
 
 
-	return render(request,'index.html', {'airlineInfoList':airlineInfoList})
+	return render(request,'index.html', {'airlineInfoList':airlineInfoList, 'dates':sorted(list(allDates))})
 
 def react(request):
         return render(request, 'react.html')
