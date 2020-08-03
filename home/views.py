@@ -159,19 +159,19 @@ def home(request):
 					allDates.add(date)
 			ranOnce = True
 
-		airline['OverallScore'] = OverallScore
-		airline['AvailabilityScore'] = AvailabilityScore
-		airline['CostScore'] = CostScore
-		airline['LegroomScore'] = LegroomScore
-		airline['TimeScore'] = TimeScore
-		airline['BaggageFeesScore'] = BaggageFeesScore
-		airline['HiddenFeesScore'] = HiddenFeesScore
-		airline['ConnectionsScore'] = ConnectionsScore
-		airline['FamilyOptionsScore'] = FamilyOptionsScore
-		airline['FoodEntertainmentScore'] = FoodEntertainmentScore
-		airline['ReimbursementScore'] = ReimbursementScore
-		airline['ServiceScore'] = ServiceScore
-		airline['TravelRewardsScore'] = TravelRewardsScore
+		airline['OverallScore'] = float("{:.3f}".format(OverallScore))
+		airline['AvailabilityScore'] = float("{:.3f}".format(AvailabilityScore))
+		airline['CostScore'] = float("{:.3f}".format(CostScore))
+		airline['LegroomScore'] = float("{:.3f}".format(LegroomScore))
+		airline['TimeScore'] = float("{:.3f}".format(TimeScore))
+		airline['BaggageFeesScore'] = float("{:.3f}".format(BaggageFeesScore))
+		airline['HiddenFeesScore'] = float("{:.3f}".format(HiddenFeesScore))
+		airline['ConnectionsScore'] = float("{:.3f}".format(ConnectionsScore))
+		airline['FamilyOptionsScore'] = float("{:.3f}".format(FamilyOptionsScore))
+		airline['FoodEntertainmentScore'] = float("{:.3f}".format(FoodEntertainmentScore))
+		airline['ReimbursementScore'] = float("{:.3f}".format(ReimbursementScore))
+		airline['ServiceScore'] = float("{:.3f}".format(ServiceScore))
+		airline['TravelRewardsScore'] = float("{:.3f}".format(TravelRewardsScore))
 
 		airline['OverallTweetsDict'] = OverallDict
 		airline['AvailabilityDict'] = AvailabilityDict
