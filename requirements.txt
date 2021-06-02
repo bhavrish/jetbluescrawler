@@ -52,7 +52,7 @@ srsly==0.2.0
 thinc==7.3.1
 tqdm==4.38.0
 twint==2.1.6
-urllib3==1.25.6
+urllib3==1.26.5
 uszipcode==0.2.4
 wasabi==0.4.0
 whitenoise==4.1.4
